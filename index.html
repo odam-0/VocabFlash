@@ -974,6 +974,22 @@
       }
       .correct-glow { animation: correctGlow 0.7s ease forwards; }
 
+      .app-footer {
+        text-align: center;
+        margin-top: 48px;
+        padding: 20px 0 8px;
+        border-top: 1px solid var(--border);
+        font-family: "DM Mono", monospace;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+      .app-footer a {
+        color: var(--accent2);
+        text-decoration: none;
+      }
+      .app-footer a:hover { text-decoration: underline; }
+
       /* ── Preset sidebar ── */
       .input-row {
         display: flex;
@@ -1532,6 +1548,7 @@
           <header>
             <h1>VocabFlash</h1>
             <p>// paste → parse → practice</p>
+            <p style="margin-top:4px;font-size:0.78rem;opacity:0.6"><a href="https://t.me/wwsrts" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">by Azizbek Saidov</a></p>
           </header>
         </div>
       </div>
@@ -1756,6 +1773,10 @@ brave - jasur - showing courage"></textarea>
           <button class="blitz-start-btn" onclick="startBlitz()">🔄 Qayta</button>
         </div>
       </div>
+
+      <footer class="app-footer">
+        <a href="https://t.me/wwsrts" target="_blank" rel="noopener">Made by Azizbek Saidov</a>
+      </footer>
     </div><!-- end .app -->
 
     <div id="achTooltip"></div>
