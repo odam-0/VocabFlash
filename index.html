@@ -1484,8 +1484,9 @@
         .match-grid { grid-template-columns: 1fr; }
       }
     </style>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>window._firebaseLoadError = false;</script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" onerror="window._firebaseLoadError=true"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js" onerror="window._firebaseLoadError=true"></script>
   </head>
   <body>
     <!-- Firebase loader -->
@@ -2965,23 +2966,44 @@ brave - jasur - showing courage"></textarea>
       }
 
       // ──────────── FIREBASE ────────────────
-      firebase.initializeApp({
-        apiKey: "AIzaSyB5VrUOyKJynIyC8Np8rj0z3I1_e6GaCQM",
-        databaseURL: "https://vocabflash-c5dbe-default-rtdb.firebaseio.com",
-        appId: "1:489130282571:web:58a42ecf8edae9a8f507ce"
-      });
-      const _fbDb = firebase.database();
+      let _fbDb = null;
       let _usersCache = {};
+
+      try {
+        firebase.initializeApp({
+          apiKey: "AIzaSyB5VrUOyKJynIyC8Np8rj0z3I1_e6GaCQM",
+          databaseURL: "https://vocabflash-c5dbe-default-rtdb.firebaseio.com",
+          appId: "1:489130282571:web:58a42ecf8edae9a8f507ce"
+        });
+        _fbDb = firebase.database();
+      } catch(e) {
+        console.warn('Firebase init failed, using localStorage only');
+      }
+
+      function sanitizeUser(u) {
+        if (!u) return u;
+        if (!Array.isArray(u.achievements)) u.achievements = [];
+        if (!Array.isArray(u.catsExplored)) u.catsExplored = [];
+        if (!Array.isArray(u.tabsUsed)) u.tabsUsed = [];
+        if (u.lp) {
+          if (!Array.isArray(u.lp.passed)) u.lp.passed = [];
+          if (!u.lp.startTimes) u.lp.startTimes = {};
+          if (!u.lp.studyMs) u.lp.studyMs = {};
+        }
+        return u;
+      }
 
       function getUsers() { return { ..._usersCache }; }
       function saveUsers(data) {
         _usersCache = { ...data };
-        _fbDb.ref('users').set(_usersCache).catch(console.error);
+        localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+        if (_fbDb) _fbDb.ref('users').set(_usersCache).catch(console.error);
       }
       function pingLastActive() {
         const name = getCurName(); if (!name || !_usersCache[name]) return;
         _usersCache[name].lastActive = Date.now();
-        _fbDb.ref('users/' + name + '/lastActive').set(_usersCache[name].lastActive).catch(() => {});
+        localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+        if (_fbDb) _fbDb.ref('users/' + name + '/lastActive').set(_usersCache[name].lastActive).catch(() => {});
       }
       setInterval(pingLastActive, 60000);
       function getCurName() { return localStorage.getItem('vf_current') || ''; }
@@ -2996,7 +3018,8 @@ brave - jasur - showing courage"></textarea>
         const name = getCurName();
         if (!name) return;
         _usersCache[name] = data;
-        _fbDb.ref('users/' + name).set(data).catch(console.error);
+        localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+        if (_fbDb) _fbDb.ref('users/' + name).set(data).catch(console.error);
       }
 
       function defaultUser(name) {
@@ -3437,6 +3460,9 @@ brave - jasur - showing courage"></textarea>
 
       function getLp(u) {
         if (!u.lp) u.lp = { started: false, unlocked: -1, startTimes: {}, passed: [] };
+        if (!Array.isArray(u.lp.passed)) u.lp.passed = [];
+        if (!u.lp.startTimes) u.lp.startTimes = {};
+        if (!u.lp.studyMs) u.lp.studyMs = {};
         return u.lp;
       }
 
@@ -3835,22 +3861,28 @@ brave - jasur - showing courage"></textarea>
 
       // ──────────── INIT ────────────────
       (async function initApp() {
-        try {
-          const snap = await _fbDb.ref('users').once('value');
-          const fbUsers = snap.val() || {};
-          if (Object.keys(fbUsers).length === 0) {
-            // Migrate existing localStorage data to Firebase
-            const lsUsers = JSON.parse(localStorage.getItem('vf_users') || '{}');
-            if (Object.keys(lsUsers).length > 0) {
-              _usersCache = lsUsers;
-              _fbDb.ref('users').set(lsUsers).catch(console.error);
+        if (_fbDb) {
+          try {
+            const snap = await _fbDb.ref('users').once('value');
+            const fbUsers = snap.val() || {};
+            if (Object.keys(fbUsers).length === 0) {
+              const lsUsers = JSON.parse(localStorage.getItem('vf_users') || '{}');
+              if (Object.keys(lsUsers).length > 0) {
+                _usersCache = lsUsers;
+                _fbDb.ref('users').set(lsUsers).catch(console.error);
+              }
+            } else {
+              _usersCache = {};
+              Object.entries(fbUsers).forEach(([k, v]) => { _usersCache[k] = sanitizeUser(v); });
             }
-          } else {
-            _usersCache = fbUsers;
+          } catch(e) {
+            console.warn('Firebase offline, using localStorage');
+            _usersCache = JSON.parse(localStorage.getItem('vf_users') || '{}');
           }
-        } catch(e) {
-          console.warn('Firebase offline, falling back to localStorage');
-          _usersCache = JSON.parse(localStorage.getItem('vf_users') || '{}');
+        } else {
+          const lsUsers = JSON.parse(localStorage.getItem('vf_users') || '{}');
+          _usersCache = {};
+          Object.entries(lsUsers).forEach(([k, v]) => { _usersCache[k] = sanitizeUser(v); });
         }
 
         document.getElementById('fbLoader').style.display = 'none';
