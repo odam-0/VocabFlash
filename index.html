@@ -88,19 +88,6 @@
         box-shadow: 0 0 12px var(--accent-glow), var(--shadow-md);
         transform: scale(1.1) rotate(20deg);
       }
-      #mainLpTimer {
-        position: fixed; top: 14px; left: 62px; z-index: 500;
-        background: var(--surface-solid); border: 1.5px solid color-mix(in srgb,var(--accent2) 40%,transparent);
-        border-radius: 20px; height: 40px;
-        display: none; align-items: center; gap: 5px;
-        padding: 0 12px;
-        font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 700;
-        color: var(--accent2);
-        box-shadow: var(--shadow-sm);
-        white-space: nowrap;
-        cursor: pointer;
-      }
-      #mainLpTimer:hover { border-color: var(--accent2); box-shadow: 0 0 10px var(--accent2-glow); }
       * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
       body {
         background: var(--bg);
@@ -358,6 +345,15 @@
       }
       .wl-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
       .admin-header { display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; color:var(--text-muted); padding:2px 0 10px; }
+      .admin-reset-btn {
+        width: 100%; margin-bottom: 10px; padding: 8px;
+        background: color-mix(in srgb, var(--accent2) 12%, var(--surface2));
+        border: 1.5px solid color-mix(in srgb, var(--accent2) 35%, transparent);
+        border-radius: 9px; color: var(--accent2);
+        font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 700;
+        cursor: pointer; transition: all 0.16s;
+      }
+      .admin-reset-btn:hover { background: color-mix(in srgb, var(--accent2) 20%, var(--surface2)); }
       .admin-cards { display:flex; flex-direction:column; gap:6px; max-height:280px; overflow-y:auto; }
       .admin-card { background:var(--surface2); border-radius:10px; padding:9px 10px; display:flex; flex-direction:column; gap:5px; }
       .admin-card-top { display:flex; align-items:center; gap:7px; }
@@ -366,20 +362,40 @@
       .admin-ustatus { font-size:0.7rem; color:var(--text-muted); white-space:nowrap; }
       .admin-del-btn { background:none; border:none; cursor:pointer; font-size:0.82rem; opacity:0.45; padding:2px 4px; border-radius:4px; flex-shrink:0; }
       .admin-del-btn:hover { opacity:1; background:color-mix(in srgb,var(--accent2) 15%,transparent); }
+      /* ── Admin control modal (per-account full control) ── */
+      .admin-modal-x {
+        background:none; border:1.5px solid var(--border); border-radius:8px;
+        color:var(--text-muted); width:32px; height:32px; cursor:pointer; font-size:1rem;
+      }
+      .admin-section-label {
+        font-size:0.7rem; color:var(--text-muted); font-family:'DM Mono',monospace;
+        letter-spacing:.05em; margin:14px 0 8px; text-transform:uppercase;
+      }
+      .admin-section-label:first-of-type { margin-top:0; }
+      .admin-quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-bottom:4px; }
+      .admin-quick-btn {
+        background:var(--surface2); border:1.5px solid var(--border); border-radius:9px;
+        color:var(--text); font-size:0.78rem; font-weight:600; font-family:'DM Sans',sans-serif;
+        padding:9px 6px; cursor:pointer; transition:all 0.15s; line-height:1.3;
+      }
+      .admin-quick-btn:hover { border-color:var(--accent); opacity:0.9; }
+      .admin-quick-btn.accent2 { background:color-mix(in srgb,var(--accent2) 14%,var(--surface2)); border-color:color-mix(in srgb,var(--accent2) 40%,transparent); color:var(--accent2); }
+      .admin-quick-btn.accent3 { background:color-mix(in srgb,var(--accent3) 14%,var(--surface2)); border-color:color-mix(in srgb,var(--accent3) 40%,transparent); color:var(--accent3); }
+      .admin-select {
+        width:100%; background:var(--surface2); border:1.5px solid var(--border); border-radius:9px;
+        color:var(--text); font-size:0.82rem; font-family:'DM Sans',sans-serif; padding:8px 10px;
+        cursor:pointer; margin-bottom:4px;
+      }
+      .admin-input {
+        flex:1; min-width:0; background:var(--surface2); border:1.5px solid var(--border); border-radius:9px;
+        color:var(--text); font-size:0.82rem; font-family:'DM Sans',sans-serif; padding:8px 10px;
+      }
       .admin-lp-wrap { font-size:0.72rem; color:var(--text-muted); display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
       .admin-lp-row { display:flex; align-items:center; gap:6px; flex:1; min-width:0; }
       .admin-lp-cat { font-weight:600; color:var(--fg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:90px; }
       .admin-lp-time { white-space:nowrap; font-family:'DM Mono',monospace; font-size:0.7rem; }
       .admin-lp-bar { flex:1; height:4px; background:var(--border); border-radius:3px; min-width:30px; overflow:hidden; }
       .admin-stats-mini { font-size:0.7rem; color:var(--text-muted); font-family:'DM Mono',monospace; display:flex; gap:10px; }
-      .free-mode-btn {
-        font-size: 0.75rem; padding: 5px 12px; border-radius: 8px; cursor: pointer;
-        background: var(--surface2); border: 1.5px solid var(--border);
-        color: var(--text-muted); font-family: 'DM Sans', sans-serif;
-        transition: all 0.18s; white-space: nowrap;
-      }
-      .free-mode-btn.active { background: color-mix(in srgb,var(--accent2) 15%,var(--surface2)); border-color: var(--accent2); color: var(--accent2); font-weight: 600; }
-      .free-mode-btn:hover { border-color: var(--accent2); color: var(--accent2); }
       .word-type-tag {
         padding: 2px 9px;
         border-radius: 99px;
@@ -957,20 +973,18 @@
       .input-row {
         display: flex;
         gap: 16px;
-        align-items: flex-start;
+        align-items: stretch;
         margin-bottom: 24px;
       }
       .preset-sidebar {
         width: 192px;
         flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
         background: var(--surface);
         border-radius: var(--radius);
         border: 1px solid var(--border);
         padding: 10px;
-        max-height: 620px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: var(--border) transparent;
       }
       .preset-sidebar-title {
         font-family: 'DM Mono', monospace;
@@ -979,31 +993,95 @@
         letter-spacing: 0.08em;
         padding: 2px 6px 8px;
         border-bottom: 1px solid var(--border);
-        margin-bottom: 6px;
-      }
-      .preset-mode-toggle {
-        display: flex;
-        gap: 4px;
         margin-bottom: 8px;
+        flex-shrink: 0;
       }
-      .preset-mode-btn {
+      /* Father: single entry point, opens the root menu */
+      .preset-father {
         flex: 1;
-        padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      /* Root menu: choose Words or Phrases, like picking a folder */
+      .preset-root {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .preset-root-btns {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+      }
+      .preset-root-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 20px 10px;
         border: 1px solid var(--border);
-        border-radius: 6px;
-        background: transparent;
-        color: var(--text-muted);
+        border-radius: 12px;
+        background: var(--surface2);
+        color: var(--text);
         cursor: pointer;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.7rem;
-        transition: all 0.15s;
-        touch-action: manipulation;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.16s;
       }
-      .preset-mode-btn.active-mode {
-        background: var(--accent);
+      .preset-root-icon { font-size: 1.5rem; }
+      .preset-root-btn:hover {
         border-color: var(--accent);
-        color: #fff;
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 8%, var(--surface2));
+        transform: translateY(-1px);
       }
+      /* Topics view: back button + scrollable list filling the rest of the panel */
+      .preset-topics {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .preset-back-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: none;
+        background: none;
+        color: var(--text-muted);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 6px;
+        margin-bottom: 6px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        transition: color 0.15s;
+        text-align: left;
+      }
+      .preset-back-btn:hover { color: var(--accent); }
+      #presetList {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding-right: 3px;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--accent) 25%, var(--border)) transparent;
+        mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent 100%);
+      }
+      #presetList::-webkit-scrollbar { width: 5px; }
+      #presetList::-webkit-scrollbar-track { background: transparent; }
+      #presetList::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 25%, var(--border)); border-radius: 5px; }
+      #presetList::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 45%, var(--border)); }
       /* ── Match Game ── */
       #match-content { padding: 8px 4px 24px; }
       .match-header {
@@ -1331,6 +1409,35 @@
         border-color: #ffd700;
         box-shadow: 0 0 0 1px #ffd700, 0 4px 20px rgba(255,215,0,0.3);
       }
+      /* ── Learning Path hero (shown on the home screen for users who haven't started) ── */
+      .lp-hero {
+        max-width: 560px;
+        margin: 0 auto 22px;
+        padding: 26px 24px;
+        text-align: center;
+        background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+        border-radius: 18px;
+        box-shadow: var(--shadow-md);
+      }
+      .lp-hero-icon { font-size: 2.4rem; margin-bottom: 8px; }
+      .lp-hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.35rem; font-weight: 700; margin-bottom: 8px;
+      }
+      .lp-hero-sub { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 18px; }
+      .lp-hero-btn {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        border: none; border-radius: 12px; color: #fff;
+        font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+        padding: 12px 28px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+      }
+      .lp-hero-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px var(--accent-glow); }
+      .lp-intro-body { font-size: 0.85rem; line-height: 1.55; color: var(--text); }
+      .lp-intro-body p { margin-bottom: 12px; }
+      .lp-intro-body strong { color: var(--accent); }
+      .lp-intro-list { margin: 6px 0 0; padding-left: 18px; color: var(--text-muted); }
+      .lp-intro-list li { margin-bottom: 6px; }
       .profile-dropdown {
         position: fixed; top: 68px; right: 14px;
         background: var(--surface); border: 1px solid var(--border);
@@ -1341,8 +1448,10 @@
         max-height: calc(100vh - 80px);
         overflow-y: auto;
       }
-      .profile-dropdown::-webkit-scrollbar { width: 4px; }
-      .profile-dropdown::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+      .profile-dropdown::-webkit-scrollbar { width: 6px; }
+      .profile-dropdown::-webkit-scrollbar-track { background: transparent; }
+      .profile-dropdown::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 25%, var(--border)); border-radius: 6px; }
+      .profile-dropdown::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 45%, var(--border)); }
       .pd-user { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
       .pd-avatar {
         width: 46px; height: 46px; border-radius: 50%;
@@ -1360,10 +1469,37 @@
       }
       .pd-stat-val { font-size: 1.15rem; font-weight: 800; font-family: 'DM Sans', sans-serif; color: var(--accent); letter-spacing: -0.02em; }
       .pd-stat-label { font-size: 0.72rem; color: var(--text-muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+
+      .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+      .stats-card {
+        background: var(--surface2); border: 1px solid var(--border); border-radius: 14px;
+        padding: 16px 12px; text-align: center;
+      }
+      .stats-card-icon { font-size: 1.4rem; margin-bottom: 6px; }
+      .stats-card-val { font-size: 1.3rem; font-weight: 800; font-family: 'DM Sans', sans-serif; color: var(--accent); letter-spacing: -0.02em; }
+      .stats-card-label { font-size: 0.72rem; color: var(--text-muted); font-family: 'DM Mono', monospace; margin-top: 3px; }
+      .stats-chart-box {
+        background: var(--surface2); border: 1px solid var(--border); border-radius: 16px;
+        padding: 18px 20px; margin-bottom: 18px;
+      }
+      .stats-chart-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 14px; font-family: 'DM Sans', sans-serif; }
+      .stats-legend { display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem; font-family: 'DM Mono', monospace; }
+      .stats-legend-item { display: flex; align-items: center; gap: 8px; }
+      .stats-legend-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+      @media (max-width: 720px) {
+        .stats-grid { grid-template-columns: 1fr 1fr; }
+      }
       .pd-ach-title { font-size: 0.68rem; color: var(--text-muted); font-family: 'DM Mono', monospace; letter-spacing: 0.07em; font-weight:700; text-transform:uppercase; margin-bottom: 8px; }
-      .pd-ach-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin-bottom: 14px; max-height: 210px; overflow-y: auto; padding-right: 2px; }
-      .pd-ach-grid::-webkit-scrollbar { width: 3px; }
-      .pd-ach-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+      .pd-ach-grid {
+        display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin-bottom: 14px;
+        max-height: 210px; overflow-y: auto; padding-right: 4px; padding-bottom: 4px;
+        mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent 100%);
+      }
+      .pd-ach-grid::-webkit-scrollbar { width: 4px; }
+      .pd-ach-grid::-webkit-scrollbar-track { background: transparent; }
+      .pd-ach-grid::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 25%, var(--border)); border-radius: 4px; }
+      .pd-ach-grid::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 45%, var(--border)); }
       .pd-ach-item {
         background: var(--surface2); border-radius: 7px; padding: 6px 2px 5px;
         font-size: 0.62rem; display: flex; flex-direction: column; align-items: center;
@@ -1391,9 +1527,16 @@
 
       /* ── Learning Path in profile ── */
       .pd-lp-title { font-size:0.68rem; letter-spacing:.09em; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin:14px 0 10px; }
-      .pd-lp-list { display:flex; flex-direction:column; gap:5px; max-height:220px; overflow-y:auto; padding-right:3px; }
-      .pd-lp-list::-webkit-scrollbar { width:4px; }
-      .pd-lp-list::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+      .pd-lp-list {
+        display:flex; flex-direction:column; gap:6px;
+        max-height:300px; overflow-y:auto; padding-right:5px; padding-bottom:6px;
+        mask-image: linear-gradient(to bottom, #000 calc(100% - 20px), transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 20px), transparent 100%);
+      }
+      .pd-lp-list::-webkit-scrollbar { width:5px; }
+      .pd-lp-list::-webkit-scrollbar-track { background: transparent; }
+      .pd-lp-list::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 25%, var(--border)); border-radius:5px; }
+      .pd-lp-list::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 45%, var(--border)); }
       .lp-cat {
         display:flex; align-items:center; gap:9px; padding:8px 11px;
         border-radius:9px; background:var(--surface2); border:1px solid var(--border);
@@ -1403,7 +1546,7 @@
       .lp-cat.lp-active { border-color:color-mix(in srgb,var(--accent) 45%,transparent); background:color-mix(in srgb,var(--accent) 8%,var(--surface2)); }
       .lp-cat.lp-locked { opacity:0.4; cursor:default; }
       .lp-cat .lp-icon { font-size:0.85rem; flex-shrink:0; }
-      .lp-cat .lp-name { flex:1; font-weight:500; }
+      .lp-cat .lp-name { flex:1; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
       .lp-cat .lp-badge {
         font-size:0.68rem; font-family:'DM Mono',monospace; color:var(--text-muted);
         background:var(--surface); padding:2px 6px; border-radius:6px; border:1px solid var(--border);
@@ -1415,6 +1558,18 @@
         white-space:nowrap; transition:opacity 0.15s;
       }
       .lp-exam-btn:hover { opacity:0.85; }
+      /* Two independent completion badges per row — Words (📝) and Phrases (💬) */
+      .lp-track-badges { display:flex; gap:4px; flex-shrink:0; }
+      .lp-track-badge {
+        font-size:0.68rem; font-family:'DM Mono',monospace; color:var(--text-muted);
+        background:var(--surface); padding:3px 7px; border-radius:6px; border:1px solid var(--border);
+        white-space:nowrap; min-width:26px; text-align:center; line-height:1.3;
+      }
+      button.lp-track-badge { cursor:pointer; font-family:inherit; transition:opacity 0.15s, transform 0.15s; }
+      button.lp-track-badge:hover { opacity:0.85; transform:translateY(-1px); }
+      .lp-track-badge.locked { opacity:0.4; }
+      .lp-track-badge.ready { background:var(--accent); color:#fff; border-color:var(--accent); font-size:0.8rem; }
+      .lp-track-badge.done { color:var(--accent3); border-color:color-mix(in srgb,var(--accent3) 40%,transparent); background:color-mix(in srgb,var(--accent3) 8%,var(--surface)); font-weight:700; }
       .lp-start-btn {
         width:100%; padding:12px; background:linear-gradient(135deg,var(--accent),var(--accent2));
         border:none; border-radius:11px; color:#fff; font-size:0.9rem; font-weight:700;
@@ -1540,7 +1695,7 @@
         .tabs::-webkit-scrollbar { display: none; }
         .tab-btn { font-size: 0.78rem; padding: 9px 6px; flex: 0 0 auto; min-width: 60px; }
         .input-row { flex-direction: column; }
-        .preset-sidebar { width: 100%; max-height: 180px; }
+        .preset-sidebar { width: 100%; min-height: 280px; }
         .input-section { padding: 18px; }
         .blitz-word-box { padding: 28px 18px; min-height: 110px; }
         #blitzWord { font-size: 1.7rem; }
@@ -1576,7 +1731,6 @@
   <body>
     <!-- Theme toggle -->
     <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Mavzu almashtirish">🌙</button>
-    <div id="mainLpTimer" onclick="toggleProfileDropdown()" title="O'quv yo'li vaqti">⏱ <span id="mainLpTimerText">--:--:--</span></div>
 
     <!-- Firebase loader -->
     <div id="fbLoader" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:14px">
@@ -1627,6 +1781,13 @@
       </div>
       <div class="profile-avatar" id="profileAvatar" onclick="toggleProfileDropdown()">?</div>
 
+      <div class="lp-hero" id="lpHero" style="display:none">
+        <div class="lp-hero-icon">🗓️</div>
+        <div class="lp-hero-title">30 kunlik so'z boyligi dasturi</div>
+        <div class="lp-hero-sub">So'zlarni tizimli tartibda o'rganib, imtihonlar bilan mustahkamlang — 30 kunda katta lug'at boyligiga erishasiz.</div>
+        <button class="lp-hero-btn" onclick="openLpIntroModal()">🚀 O'qishni boshlash</button>
+      </div>
+
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('input')">✏️ Input</button>
         <button class="tab-btn" onclick="switchTab('flashcard')">🃏 Flashcards</button>
@@ -1638,36 +1799,46 @@
       <!-- INPUT PANEL -->
       <div id="panel-input" class="panel active">
         <div class="input-row">
-          <div class="preset-sidebar">
+          <div class="preset-sidebar" id="presetSidebar">
             <div class="preset-sidebar-title">📚 TAYYOR LEKSIKA</div>
-            <div class="preset-mode-toggle">
-              <button class="preset-mode-btn active-mode" id="modeBtnWords" onclick="setPresetMode('words')">So'zlar</button>
-              <button class="preset-mode-btn" id="modeBtnPhrases" onclick="setPresetMode('phrases')">Gaplar</button>
+            <div class="preset-father" id="presetFather">
+              <button class="preset-root-btn" onclick="openPresetRoot()">
+                <span class="preset-root-icon">📖</span>
+                <span>Lug'atlar</span>
+              </button>
             </div>
-            <div id="presetList"></div>
+            <div class="preset-root" id="presetRoot" style="display:none">
+              <button class="preset-back-btn" onclick="closePresetRoot()">
+                <span>←</span> <span>Orqaga</span>
+              </button>
+              <div class="preset-root-btns">
+                <button class="preset-root-btn" onclick="openPresetMode('words')">
+                  <span class="preset-root-icon">📝</span>
+                  <span>So'zlar</span>
+                </button>
+                <button class="preset-root-btn" onclick="openPresetMode('phrases')">
+                  <span class="preset-root-icon">💬</span>
+                  <span>Gaplar</span>
+                </button>
+              </div>
+            </div>
+            <div class="preset-topics" id="presetTopics" style="display:none">
+              <button class="preset-back-btn" onclick="closePresetMode()">
+                <span>←</span> <span id="presetTopicsLabel">So'zlar</span>
+              </button>
+              <div id="presetList"></div>
+            </div>
           </div>
           <div class="input-section">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <label style="margin:0">PASTE YOUR VOCABULARY LIST</label>
-            <button id="freeModeBtn" onclick="toggleFreeMode()" class="free-mode-btn" title="O'z so'zlaringizni ishlating — countdown to'xtaydi">
-              🆓 Erkin rejim
-            </button>
-          </div>
-          <div id="freeModeBanner" style="display:none;background:color-mix(in srgb,var(--accent2) 12%,var(--surface2));border:1px solid color-mix(in srgb,var(--accent2) 35%,transparent);border-radius:10px;padding:9px 14px;font-size:0.8rem;color:var(--accent2);margin-bottom:10px;font-family:'DM Mono',monospace">
-            ⏸ Erkin rejim — countdown to'xtatildi. Chiqish uchun yana bosing.
-          </div>
+          <label style="margin:0 0 6px;display:block">PASTE YOUR VOCABULARY LIST</label>
+          <div class="input-hint" style="margin-top:0;margin-bottom:8px">Har bir qatorga shu tartibda joylashtiring: <span>so'z - tarjima - definition</span></div>
           <textarea id="vocabInput" placeholder="so'z - tarjima - definition
 apple - olma - a round fruit that grows on trees
 run - yugurmoq - to move quickly on foot
 brave - jasur - showing courage"></textarea>
-          <div class="input-hint">
-            Istalgan formatda yozing — <span>AI o'zi tushunadi!</span><br />
-            So'z, definition, tarjima, raqam, bo'lim — qanday bo'lsa ham
-            ishlaydi ✨
-          </div>
 
           <button class="parse-btn" id="parseBtn" onclick="parseWords()">
-            <span id="parseBtnText">✨ Parse qil</span>
+            <span id="parseBtnText">✨ Start</span>
           </button>
           <div class="ai-status" id="aiStatus">
             <div class="ai-dot"></div>
@@ -1863,6 +2034,8 @@ brave - jasur - showing courage"></textarea>
         </div>
       </div>
 
+      <div id="panel-stats" class="panel"></div>
+
       <footer class="app-footer">
         <a href="https://t.me/wwsrts" target="_blank" rel="noopener">Made by Azizbek Saidov</a>
       </footer>
@@ -1914,6 +2087,83 @@ brave - jasur - showing courage"></textarea>
             <div class="spell-result-sub" id="spellResultSub"></div>
             <button class="spell-done-btn" onclick="closeSpellModal()">✓ Davom etish</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final (Mastery) Exam Modal -->
+    <div id="finalExamModal" class="modal-overlay" style="display:none">
+      <div class="exam-box" style="max-width:520px">
+        <div class="exam-top">
+          <div class="exam-cat-label" id="feStageLabel">🏆 Yakuniy imtihon</div>
+          <button onclick="closeFinalExamModal()" style="background:none;border:1.5px solid var(--border);border-radius:8px;color:var(--text-muted);width:30px;height:30px;cursor:pointer;font-size:0.9rem">✕</button>
+        </div>
+        <div class="exam-prog-bar"><div class="exam-prog-fill" id="feProgFill" style="width:0%"></div></div>
+
+        <div id="feIntroSection"></div>
+
+        <div id="feSpellSection" style="display:none">
+          <div class="spell-prompt">
+            <div class="spell-hint-label" id="feSpellHintLabel">O'zbek tarjima</div>
+            <div class="spell-uzbek" id="feSpellUzbek"></div>
+            <div class="spell-def" id="feSpellDef"></div>
+          </div>
+          <div class="spell-input-wrap">
+            <input class="spell-input" id="feSpellInput" type="text" placeholder="Ingliz so'zni yozing..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')feCheckSpell()" />
+            <button class="spell-check-btn" onclick="feCheckSpell()">✓</button>
+          </div>
+          <div class="spell-feedback" id="feSpellFeedback"></div>
+        </div>
+
+        <div id="feMatchSection" style="display:none">
+          <div class="match-grid" style="margin-top:4px">
+            <div>
+              <div class="match-col-label">📝 So'zlar</div>
+              <div class="match-col" id="feMatchWords"></div>
+            </div>
+            <div>
+              <div class="match-col-label">💭 Tarjimalar</div>
+              <div class="match-col" id="feMatchDefs"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="feSentenceSection" style="display:none">
+          <div class="exam-cat-label" style="margin-bottom:10px" id="feSentUzbek"></div>
+          <div class="exam-word" id="feSentWord" style="font-size:1.35rem"></div>
+          <div class="exam-opts" id="feSentOpts"></div>
+        </div>
+
+        <div id="feChoiceSection" style="display:none">
+          <div class="exam-word" id="feChoiceWord"></div>
+          <div class="spell-def" id="feChoiceDef" style="text-align:center;margin-bottom:14px"></div>
+          <div class="exam-opts" id="feChoiceOpts"></div>
+        </div>
+
+        <div id="feResultSection" class="exam-result" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- Learning Path Intro Modal -->
+    <div id="lpIntroModal" class="modal-overlay" style="display:none">
+      <div class="modal-box" style="max-width:460px; text-align:left">
+        <div class="modal-title" style="text-align:center">🗓️ 30 kunlik so'z boyligi</div>
+        <div class="lp-intro-body">
+          <p><strong>Nima bu?</strong><br>
+          32 ta turkum bor (Body Parts, Home, Furniture...), har birida ~30 ta so'z. Turkumlarni o'zingiz xohlagan tartibda o'rganasiz.</p>
+          <p><strong>Qanday ishlaydi?</strong><br>
+          O'zingiz istagan turkumni tanlang — u sizga "band" bo'lib qoladi, boshqalari shu turkumni tugatguningizcha qulflanadi. Avval 📝 So'zlar (2 soat o'rgangach imtihon ochiladi), keyin 💬 Gaplar (yana 2 soat) — ikkalasini ham o'tsangiz, turkum tugaydi va yangi turkum tanlashingiz mumkin. 30 kun oxirida barcha o'tilgan turkumlar bo'yicha 🏆 Yakuniy imtihon bilan hammasini mustahkamlaysiz.</p>
+          <p><strong>So'zlarni qanday yodlash kerak?</strong></p>
+          <ul class="lp-intro-list">
+            <li>Flashcardda "Bilmadim" bossangiz, o'sha so'z qayta-qayta chiqib turadi.</li>
+            <li>Faqat o'qib qo'ymang — Quiz va Match orqali faol ishlating, bu yodda qolishni kuchaytiradi.</li>
+            <li>Yangi o'rgangan so'zlaringizni "Gaplar" rejimidagi namunalarda gap ichida qanday ishlatilishini ko'ring.</li>
+            <li>Bir martada ko'p emas, har kuni ozdan-ozdan lekin muntazam mashq qiling.</li>
+          </ul>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <button class="parse-btn" style="background:var(--surface2);color:var(--text)" onclick="closeLpIntroModal()">Bekor qilish</button>
+          <button class="parse-btn" onclick="confirmStartLearningPath()">🚀 Boshlaymiz!</button>
         </div>
       </div>
     </div>
@@ -2013,19 +2263,41 @@ brave - jasur - showing courage"></textarea>
       let activePreset = null;
       let presetMode = 'words';
 
-      function setPresetMode(mode) {
+      // Father: single entry point → opens the root (Words/Phrases) menu
+      function openPresetRoot() {
+        document.getElementById('presetFather').style.display = 'none';
+        document.getElementById('presetRoot').style.display = 'flex';
+      }
+
+      function closePresetRoot() {
+        document.getElementById('presetRoot').style.display = 'none';
+        document.getElementById('presetFather').style.display = 'flex';
+      }
+
+      // Root menu: pick Words or Phrases, then drill into the 30-topic list for that mode
+      function openPresetMode(mode) {
         presetMode = mode;
-        document.getElementById('modeBtnWords').classList.toggle('active-mode', mode === 'words');
-        document.getElementById('modeBtnPhrases').classList.toggle('active-mode', mode === 'phrases');
-        if (activePreset !== null) loadPreset(activePreset);
+        document.getElementById('presetRoot').style.display = 'none';
+        document.getElementById('presetTopics').style.display = 'flex';
+        document.getElementById('presetTopicsLabel').textContent = mode === 'words' ? "So'zlar" : 'Gaplar';
+        renderPresetSidebar();
+      }
+
+      function closePresetMode() {
+        document.getElementById('presetTopics').style.display = 'none';
+        document.getElementById('presetRoot').style.display = 'flex';
       }
 
       function renderPresetSidebar() {
         const list = document.getElementById('presetList');
+        if (!list) return;
+        // Completion is tracked separately per mode, so a category can show
+        // "done" in Gaplar without that bleeding into its So'zlar status.
+        const isPhrasesMode = presetMode === 'phrases';
         list.innerHTML = PRESET_CATEGORIES.map((cat, i) => {
           const unlocked = isCatUnlocked(i);
-          const passed = isCatPassed(i);
-          const examReady = isExamReady(i);
+          const passed = isPhrasesMode ? isPhrasePassed(i) : isCatPassed(i);
+          const examReady = isPhrasesMode ? isPhraseExamReady(i) : isExamReady(i);
           let icon = '';
           if (passed) icon = '✅ ';
           else if (!unlocked) icon = '🔒 ';
@@ -2033,19 +2305,48 @@ brave - jasur - showing courage"></textarea>
           const dimmed = !unlocked ? 'opacity:0.45;cursor:default;' : '';
           return `<button class="preset-btn${passed ? ' cat-passed-btn' : ''}" id="preset-btn-${i}"
             style="${dimmed}" onclick="${unlocked ? `loadPreset(${i})` : 'showLpLockMsg()'}"
-            title="${!unlocked ? 'Qulflangan — o\'quv yo\'lida oldingi bo\'limni tugatang' : cat.name}"
+            title="${!unlocked ? 'Qulflangan — avval tanlagan bo\'limingizni tugating' : cat.name}"
             >${icon}${cat.name}</button>`;
         }).join('');
       }
 
       function showLpLockMsg() {
-        showAchievementToast({ icon:'🔒', name:'Qulflangan', desc:'Oldingi bo\'limni imtihondan o\'ting' });
+        const u = getCurUser();
+        const lp = u ? getLp(u) : null;
+        if (lp && lp.started && lp.active !== undefined && lp.active !== null && lp.active >= 0) {
+          const activeCat = PRESET_CATEGORIES[lp.active];
+          showAchievementToast({ icon: '🔒', name: 'Band', desc: activeCat ? `Avval "${activeCat.name}" bo'limini (so'z + gap) tugating` : "Avval tanlagan bo'limingizni tugating" });
+        } else {
+          showAchievementToast({ icon: '🔒', name: 'Qulflangan', desc: "Avval o'quv yo'lini boshlang" });
+        }
+      }
+
+      // Clicking an open category while nothing else is chosen COMMITS it as
+      // the learner's pick — from then on every other unfinished category
+      // locks until this one's words AND phrases are both done.
+      function commitLpChoice(idx) {
+        const u = getCurUser(); if (!u) return;
+        const lp = getLp(u);
+        if (!lp.started) return;
+        if (lp.forceUnlocked.includes(idx)) return; // admin-opened categories don't consume the pick slot
+        const fullyDone = lp.passed.includes(idx) && lp.passedPhrases.includes(idx);
+        if (fullyDone) return;
+        const nothingChosen = lp.active === undefined || lp.active === null || lp.active < 0;
+        if (!nothingChosen) return;
+        lp.active = idx;
+        if (!lp.startTimes) lp.startTimes = {};
+        if (!lp.startTimes[String(idx)]) lp.startTimes[String(idx)] = Date.now();
+        u.lp = lp; saveCurUser(u);
+        renderPresetSidebar();
+        renderProfileDropdown(u);
+        startLpCountdown();
       }
 
       function loadPreset(idx) {
         const cat = PRESET_CATEGORIES[idx];
         if (!cat) return;
         if (!isCatUnlocked(idx)) { showLpLockMsg(); return; }
+        commitLpChoice(idx);
         activePreset = idx;
         document.querySelectorAll('.preset-btn').forEach((b, i) => {
           b.classList.toggle('active-preset', i === idx);
@@ -2398,7 +2699,7 @@ brave - jasur - showing courage"></textarea>
 
           statusEl.classList.remove("visible");
           btn.disabled = false;
-          btnText.innerHTML = "✨ Parse qil";
+          btnText.innerHTML = "✨ Start";
 
           renderWordList();
           updateWordCountBadges();
@@ -2416,7 +2717,7 @@ brave - jasur - showing courage"></textarea>
           statusText.style.color = "var(--accent2)";
           statusText.textContent = "Xato: " + err.message;
           btn.disabled = false;
-          btnText.innerHTML = "✨ Parse qil";
+          btnText.innerHTML = "✨ Start";
           setTimeout(() => {
             statusEl.classList.remove("visible");
             statusEl.removeAttribute("style");
@@ -3067,6 +3368,153 @@ brave - jasur - showing courage"></textarea>
           if (idleBest) idleBest.textContent = bz.best ? `🏅 Rekord: ${bz.best} ball` : '';
           if (!allWords.length) document.querySelector('.blitz-start-btn').disabled = true;
         }
+        if (tab === "stats") renderStatsPanel();
+      }
+
+      // ──────────── STATS PANEL ────────────────
+      function getCurrentStreak(u) {
+        u = u || getCurUser(); if (!u) return 0;
+        const dm = u.dailyMs || {};
+        let streak = 0;
+        const base = new Date();
+        for (let i = 0; i < 3650; i++) {
+          const d = new Date(base);
+          d.setUTCDate(d.getUTCDate() - i);
+          if ((dm[d.toISOString().slice(0, 10)] || 0) > 0) streak++;
+          else break;
+        }
+        return streak;
+      }
+
+      // Bar chart via plain SVG rects — no charting library needed.
+      function buildBarChartSVG(values, labels, width, height) {
+        width = width || 600; height = height || 150;
+        const max = Math.max(1, ...values);
+        const n = values.length;
+        const gap = 4;
+        const barW = (width - gap * (n - 1)) / n;
+        const plotH = height - 20;
+        const bars = values.map((v, i) => {
+          const h = v > 0 ? Math.max(3, (v / max) * plotH) : 1;
+          const x = i * (barW + gap);
+          const y = plotH - h + 2;
+          const fill = v > 0 ? 'var(--accent2)' : 'var(--border)';
+          return `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="2.5" fill="${fill}"><title>${labels[i]}: ${v}m</title></rect>
+            <text x="${x + barW / 2}" y="${height - 4}" font-size="9" fill="var(--text-muted)" text-anchor="middle" font-family="'DM Mono',monospace">${labels[i]}</text>`;
+        }).join('');
+        return `<svg viewBox="0 0 ${width} ${height}" style="width:100%;height:${height}px" preserveAspectRatio="xMidYMid meet">${bars}</svg>`;
+      }
+
+      // Donut chart via stroke-dasharray on stacked <circle> elements.
+      function buildDonutSVG(segments, size, strokeWidth) {
+        size = size || 140; strokeWidth = strokeWidth || 22;
+        const total = segments.reduce((s, x) => s + x.value, 0) || 1;
+        const r = (size - strokeWidth) / 2;
+        const c = size / 2;
+        const circumference = 2 * Math.PI * r;
+        let offset = 0;
+        const circles = segments.map(seg => {
+          const frac = seg.value / total;
+          const len = frac * circumference;
+          const dash = `${len} ${circumference - len}`;
+          const dashoffset = -offset;
+          offset += len;
+          return `<circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${seg.color}" stroke-width="${strokeWidth}" stroke-dasharray="${dash}" stroke-dashoffset="${dashoffset}"><title>${seg.label}: ${seg.value}</title></circle>`;
+        }).join('');
+        return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)">${circles}</svg>`;
+      }
+
+      // Builds the full stats markup (cards + both charts) for an arbitrary
+      // user object — used both for the logged-in user's own Stats tab and
+      // for the admin panel's per-user stats viewer, so it never reaches for
+      // getCurUser()/current-user-only helpers internally.
+      function buildStatsHTML(u) {
+        if (!u) return '';
+        const lp = getLp(u);
+        const units = lpUnitCounts(u);
+        const streak = getCurrentStreak(u);
+
+        const cards = [
+          { icon: '📖', val: u.wordsTotal || 0, label: "So'z yodlangan" },
+          { icon: '✅', val: `${units.done}/${units.total}`, label: "Bo'limlar" },
+          { icon: '🔥', val: streak, label: 'Ketma-ket kun' },
+          { icon: '⏱', val: fmtHM(getTotalMs(u)), label: 'Jami vaqt' },
+          { icon: '🏅', val: `${(u.achievements || []).length}/${ACHIEVEMENTS.length}`, label: 'Yutuqlar' },
+          { icon: '🧠', val: u.quizCorrect || 0, label: "Quiz to'g'ri" },
+          { icon: '⚡', val: u.blitzBest || 0, label: 'Blitz rekord' },
+          { icon: '🎯', val: u.matchBest || 0, label: 'Match rekord' },
+        ];
+        const cardsHtml = cards.map(c => `<div class="stats-card"><div class="stats-card-icon">${c.icon}</div><div class="stats-card-val">${c.val}</div><div class="stats-card-label">${c.label}</div></div>`).join('');
+
+        const days = 14;
+        const vals = [], labels = [];
+        const base = new Date();
+        for (let i = days - 1; i >= 0; i--) {
+          const d = new Date(base);
+          d.setUTCDate(d.getUTCDate() - i);
+          const k = d.toISOString().slice(0, 10);
+          vals.push(Math.round(((u.dailyMs || {})[k] || 0) / 60000));
+          labels.push(String(d.getUTCDate()));
+        }
+        const barHtml = buildBarChartSVG(vals, labels);
+
+        let done = 0, active = 0, open = 0, locked = 0;
+        for (let i = 0; i < PRESET_CATEGORIES.length; i++) {
+          const wp = lp.passed.includes(i), pp = lp.passedPhrases.includes(i);
+          if (wp && pp) done++;
+          else if (lp.active === i) active++;
+          else if (isCatUnlockedFor(u, i)) open++;
+          else locked++;
+        }
+        const segs = [
+          { label: 'Bajarilgan', value: done, color: 'var(--accent3)' },
+          { label: 'Faol', value: active, color: 'var(--accent)' },
+          { label: 'Ochiq (tanlanmagan)', value: open, color: 'var(--accent2)' },
+          { label: 'Qulflangan', value: locked, color: 'var(--text-muted)' },
+        ].filter(s => s.value > 0);
+        const donutHtml = buildDonutSVG(segs);
+        const legendHtml = segs.map(s => `<div class="stats-legend-item"><span class="stats-legend-dot" style="background:${s.color}"></span>${s.label}: ${s.value}</div>`).join('');
+
+        return `
+          <div class="stats-grid">${cardsHtml}</div>
+          <div class="stats-chart-box">
+            <div class="stats-chart-title">📈 Kunlik faollik (oxirgi 14 kun)</div>
+            <div>${barHtml}</div>
+          </div>
+          <div class="stats-chart-box">
+            <div class="stats-chart-title">🥧 Bo'limlar holati</div>
+            <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center">
+              <div>${donutHtml}</div>
+              <div class="stats-legend">${legendHtml}</div>
+            </div>
+          </div>`;
+      }
+
+      function renderStatsPanel() {
+        const u = getCurUser(); if (!u) return;
+        const panel = document.getElementById('panel-stats');
+        if (panel) panel.innerHTML = buildStatsHTML(u);
+      }
+
+      // Admin: view any account's full stats (read-only) in a modal, reusing
+      // the exact same cards/charts as the user's own Stats tab.
+      function openUserStatsModal(name) {
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        document.getElementById('userStatsModal')?.remove();
+        const modal = document.createElement('div');
+        modal.id = 'userStatsModal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+          <div class="modal-box" style="max-width:640px;max-height:85vh;overflow-y:auto">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div class="modal-title" style="font-size:1.2rem">📊 ${name} — statistika</div>
+              <button onclick="document.getElementById('userStatsModal').remove()" class="admin-modal-x">✕</button>
+            </div>
+            ${buildStatsHTML(u)}
+          </div>`;
+        document.body.appendChild(modal);
+        modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
       }
 
       // ──────────── KEYBOARD ────────────────
@@ -3164,6 +3612,7 @@ brave - jasur - showing courage"></textarea>
         { id:'lp_cat25',       icon:'💫', name:'Yigirma besh bo\'lim', desc:'O\'quv yo\'lida 25 ta bo\'limni yakunlang' },
         { id:'lp_cat30',       icon:'👑', name:'To\'liq kurs!',        desc:'Barcha 30 ta bo\'limni imtihondan o\'ting' },
         { id:'lp_comeback',    icon:'💪', name:'Qayta urinish',       desc:'Muvaffaqiyatsizdan so\'ng imtihonni tugatib bering' },
+        { id:'final_exam',     icon:'🏆', name:'Yakuniy imtihon',     desc:'O\'tilgan barcha turkumlar bo\'yicha yakuniy imtihonni 100% topshiring' },
         // ── CATEGORIES EXPLORED ──
         { id:'cat_1',          icon:'🌐', name:'Birinchi turkum',      desc:'Birinchi so\'z turkumini o\'rganing' },
         { id:'cat_5',          icon:'📍', name:'Besh turkum',          desc:'5 xil so\'z turkumini o\'rganing' },
@@ -3211,6 +3660,7 @@ brave - jasur - showing courage"></textarea>
         if (!Array.isArray(u.achievements)) u.achievements = [];
         if (!Array.isArray(u.catsExplored)) u.catsExplored = [];
         if (!Array.isArray(u.tabsUsed)) u.tabsUsed = [];
+        if (!u.dailyMs) u.dailyMs = {};
         if (u.lp) {
           if (!Array.isArray(u.lp.passed)) u.lp.passed = [];
           if (!u.lp.startTimes) u.lp.startTimes = {};
@@ -3234,7 +3684,11 @@ brave - jasur - showing courage"></textarea>
         localStorage.setItem('vf_users', JSON.stringify(_usersCache));
         if (_fbDb) _fbDb.ref('users/' + name + '/lastActive').set(_usersCache[name].lastActive).catch(() => {});
       }
-      setInterval(pingLastActive, 30000);
+      setInterval(() => {
+        pingLastActive();
+        if (typeof checkpointStudySession === 'function') checkpointStudySession();
+        if (typeof checkpointAppSession === 'function') checkpointAppSession();
+      }, 10000);
 
       function setupFirebasePresence(name) {
         if (!_fbDb || !name) return;
@@ -3298,10 +3752,33 @@ brave - jasur - showing courage"></textarea>
 
       function saveCurUser(data) {
         const name = getCurName();
-        if (!name) return;
+        if (!name) return Promise.resolve();
+        data.updatedAt = Date.now();
         _usersCache[name] = data;
         localStorage.setItem('vf_users', JSON.stringify(_usersCache));
-        if (_fbDb) _fbDb.ref('users/' + name).set(data).catch(console.error);
+        if (_fbDb) return _fbDb.ref('users/' + name).set(data).catch(console.error);
+        return Promise.resolve();
+      }
+
+      // Merge a remote (Firebase) users snapshot into _usersCache, per-user
+      // "newest updatedAt wins" — never blindly let a stale cloud copy
+      // clobber progress this device already has (e.g. if a previous
+      // session's write didn't finish before the tab/app closed).
+      function mergeRemoteUsers(remoteUsers) {
+        let changed = false;
+        const merged = { ..._usersCache };
+        Object.entries(remoteUsers).forEach(([name, remoteU]) => {
+          const localU = merged[name];
+          const remoteTs = (remoteU && remoteU.updatedAt) || 0;
+          const localTs = localU ? (localU.updatedAt || 0) : -1;
+          if (!localU || remoteTs > localTs) {
+            merged[name] = sanitizeUser(remoteU);
+            changed = true;
+          }
+        });
+        _usersCache = merged;
+        if (changed) localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+        return changed;
       }
 
       function defaultUser(name) {
@@ -3309,9 +3786,10 @@ brave - jasur - showing courage"></textarea>
                  matchGames: 0, quizCorrect: 0, quizPerfect: 0, quizRounds: 0,
                  wordsTotal: 0, fcReviewed: 0, fcBilmadimTotal: 0, fcZeroRuns: 0,
                  catsExplored: [], parseCount: 0, examFailed: false,
-                 tabsUsed: [], lastLogin: Date.now(),
+                 tabsUsed: [], lastLogin: Date.now(), updatedAt: Date.now(),
                  achievements: [], createdAt: new Date().toISOString().slice(0,10),
-                 lp: { started: false, unlocked: -1, startTimes: {}, passed: [] } };
+                 totalMs: 0, dailyMs: {},
+                 lp: { started: false, unlocked: -1, active: -1, startTimes: {}, passed: [], passedPhrases: [] } };
       }
 
       // Ensure owner account always exists
@@ -3368,16 +3846,12 @@ brave - jasur - showing courage"></textarea>
         updatePointsDisplay();
         loadFromStorage();
         startStudySession();
+        startAppSession();
         pingLastActive();
         setupFirebasePresence(name);
         if (name === OWNER_NAME) grantAchievement('owner_access');
-        // Start LP countdown if already active (shows top-left timer)
         const _loginUser = _usersCache[name];
-        if (_loginUser && _loginUser.lp && _loginUser.lp.started) {
-          startLpCountdown();
-        } else {
-          refreshMainTimer();
-        }
+        if (_loginUser && _loginUser.lp && _loginUser.lp.started) startLpCountdown();
       }
 
       function doRegister() {
@@ -3399,13 +3873,19 @@ brave - jasur - showing courage"></textarea>
         updateProfileUI();
         updatePointsDisplay();
         loadFromStorage();
+        startAppSession();
         pingLastActive();
         setupFirebasePresence(name);
       }
 
-      function doLogout() {
+      async function doLogout() {
         const name = getCurName();
-        pauseStudySession();
+        const p1 = pauseStudySession();
+        const p2 = pauseAppSession();
+        // Give the final save a moment to actually reach the server before we
+        // switch accounts — without this, a very recent change could still be
+        // in flight and get lost from the outgoing account's cloud copy.
+        await Promise.race([Promise.all([p1, p2]), new Promise(r => setTimeout(r, 1500))]);
         // Mark presence as offline immediately on logout
         if (_fbDb && name) {
           _fbDb.ref('presence/' + name).set({ online: false, lastSeen: firebase.database.ServerValue.TIMESTAMP }).catch(()=>{});
@@ -3416,7 +3896,6 @@ brave - jasur - showing courage"></textarea>
         document.getElementById('profileDropdown').style.display = 'none';
         if (lpCountdownRef) { clearInterval(lpCountdownRef); lpCountdownRef = null; }
         if (adminRefreshRef) { clearInterval(adminRefreshRef); adminRefreshRef = null; }
-        updateMainTimer(null);
         updateProfileUI();
         showLoginModal();
       }
@@ -3463,6 +3942,30 @@ brave - jasur - showing courage"></textarea>
           av.classList.remove('owner-avatar');
           av.title = 'Kirish';
         }
+        updateLpHero(u);
+      }
+
+      // Show the "start 30-day plan" hero on the home screen for logged-in
+      // users who haven't started their learning path yet.
+      function updateLpHero(u) {
+        const hero = document.getElementById('lpHero');
+        if (!hero) return;
+        u = u || getCurUser();
+        hero.style.display = (u && !getLp(u).started) ? 'block' : 'none';
+      }
+
+      function openLpIntroModal() {
+        document.getElementById('lpIntroModal').style.display = 'flex';
+      }
+
+      function closeLpIntroModal() {
+        document.getElementById('lpIntroModal').style.display = 'none';
+      }
+
+      function confirmStartLearningPath() {
+        startLearningPath();
+        closeLpIntroModal();
+        updateLpHero();
       }
 
       function refreshAdminSection() {
@@ -3521,12 +4024,35 @@ brave - jasur - showing courage"></textarea>
         const lp = getLp(u);
         const lpRows = PRESET_CATEGORIES.map((_, i) => buildLpRow(u, i)).join('');
         const passedCount = lp.passed ? lp.passed.length : 0;
+        const totalCats = PRESET_CATEGORIES.length;
+        const units = lpUnitCounts(u);
+        const pct = units.total ? Math.round((units.done / units.total) * 100) : 0;
+        const daysElapsed = lp.startTimes && lp.startTimes['0'] ? Math.floor((Date.now() - lp.startTimes['0']) / 86400000) : 0;
+        const finalExamUnlocked = units.done === units.total;
+        const finalExamBtn = finalExamUnlocked
+          ? `<button class="lp-start-btn" style="width:100%;padding:9px" onclick="openFinalExam();document.getElementById('profileDropdown').style.display='none'">🏆 Yakuniy imtihon</button>`
+          : (units.done > 0
+            ? `<div style="text-align:center;font-size:0.72rem;color:var(--text-muted);padding:6px 0">🔒 Yakuniy imtihon — ${units.done}/${units.total} bo'lim tugagach ochiladi</div>`
+            : '');
+        const progressSection = lp.started ? `
+          <div class="pd-progress-summary" style="background:color-mix(in srgb,var(--accent) 8%,var(--surface2));border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:12px;padding:12px 14px;margin-bottom:14px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+              <span style="font-size:0.78rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:.05em">UMUMIY PROGRESS</span>
+              <span style="font-size:1.1rem;font-weight:800;color:var(--accent)">${pct}%</span>
+            </div>
+            <div class="progress-bar" style="margin-bottom:8px"><div class="progress-fill" style="width:${pct}%"></div></div>
+            <div style="font-size:0.78rem;color:var(--text-muted);display:flex;justify-content:space-between;margin-bottom:${units.done > 0 ? '10px' : '0'}">
+              <span>✅ ${units.done}/${units.total} bo'lim o'tildi</span>
+              <span>📅 ${daysElapsed}-kun</span>
+            </div>
+            ${finalExamBtn}
+          </div>` : '';
+        // When the learning path hasn't started, the CTA lives on the home
+        // screen (lpHero) instead of buried in this menu — nothing to show here.
         const lpSection = lp.started
-          ? `<div class="pd-lp-title">O'QUV YO'LI (${passedCount}/${PRESET_CATEGORIES.length})</div>
+          ? `<div class="pd-lp-title">O'QUV YO'LI (${passedCount}/${totalCats})</div>
              <div class="pd-lp-list">${lpRows}</div>`
-          : `<div class="pd-lp-title">O'QUV YO'LI</div>
-             <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">Turkumlarni ketma-ket o'rganish: har 3 soatda yangi turkum, imtihon topshirib olgach keyingisi ochiladi.</div>
-             <button class="lp-start-btn" onclick="startLearningPath()">🚀 O'qishni boshlash</button>`;
+          : '';
         const adminSection = u.name === OWNER_NAME ? buildAdminSection() : '';
         dd.innerHTML = `
           <div class="pd-user">
@@ -3543,6 +4069,7 @@ brave - jasur - showing courage"></textarea>
               </svg>
             </button>
           </div>
+          <button onclick="switchTab('stats');document.getElementById('profileDropdown').style.display='none'" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:color-mix(in srgb,var(--accent) 10%,var(--surface2));border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:10px 14px;margin-bottom:14px;color:var(--text);font-size:0.85rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer">📊 Statistikam</button>
           <div style="display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--accent3) 10%,var(--surface2));border:1px solid color-mix(in srgb,var(--accent3) 30%,transparent);border-radius:12px;padding:10px 14px;margin-bottom:14px">
             <span style="font-size:1.3rem">💰</span>
             <div style="flex:1">
@@ -3563,12 +4090,22 @@ brave - jasur - showing courage"></textarea>
             <div class="pd-stat"><div class="pd-stat-val">${u.quizCorrect||0}</div><div class="pd-stat-label">🧠 Quiz</div></div>
             <div class="pd-stat"><div class="pd-stat-val">${u.wordsTotal||0}</div><div class="pd-stat-label">📚 So'z</div></div>
             <div class="pd-stat"><div class="pd-stat-val">${u.achievements?u.achievements.length:0}/${ACHIEVEMENTS.length}</div><div class="pd-stat-label">🏅 Yutuq</div></div>
+            <div class="pd-stat"><div class="pd-stat-val">${fmtHM(getTotalMs(u))}</div><div class="pd-stat-label">⏱ Jami vaqt</div></div>
+          </div>
+          <div class="pd-section-label" style="font-size:0.7rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:.05em;margin-bottom:6px">VAQT STATISTIKASI</div>
+          <div class="pd-stats-grid">
+            <div class="pd-stat"><div class="pd-stat-val">${fmtHM(getTodayMs(u))}</div><div class="pd-stat-label">📅 Bugun</div></div>
+            <div class="pd-stat"><div class="pd-stat-val">${fmtHM(getWeekMs(u))}</div><div class="pd-stat-label">🗓 7 kun</div></div>
+            <div class="pd-stat"><div class="pd-stat-val">${fmtHM(getMonthMs(u))}</div><div class="pd-stat-label">📆 30 kun</div></div>
           </div>
           <div class="pd-divider"></div>
+          ${progressSection}
           ${lpSection}
           <div class="pd-divider"></div>
           <div class="pd-ach-title">YUTUQLAR (${earned.size}/${ACHIEVEMENTS.length})</div>
           <div class="pd-ach-grid">${achHtml}</div>
+          <div class="pd-divider"></div>
+          <button class="admin-reset-btn" onclick="resetCurrentUserProgress()">🔄 Progressni reset qilish</button>
           ${adminSection}`;
         if (lp.started) startLpCountdown();
       }
@@ -3594,13 +4131,12 @@ brave - jasur - showing courage"></textarea>
       function getActiveLpCatForUser(usr) {
         const lp = usr.lp || {};
         if (!lp.started) return -1;
-        const unlocked = lp.unlocked ?? -1;
+        const active = lp.active;
+        if (active === undefined || active === null || active < 0) return -1;
         const passed = new Set(lp.passed || []);
-        const maxIdx = Math.min(unlocked + 1, PRESET_CATEGORIES.length - 1);
-        for (let i = 0; i <= maxIdx; i++) {
-          if (!passed.has(i)) return i;
-        }
-        return -1;
+        const passedPhrases = new Set(lp.passedPhrases || []);
+        if (passed.has(active) && passedPhrases.has(active)) return -1;
+        return active;
       }
 
       function buildAdminSection() {
@@ -3626,37 +4162,41 @@ brave - jasur - showing courage"></textarea>
           // LP info
           const lp = us.lp || {};
           let lpHtml = '';
+          const units = lpUnitCounts(us);
+          let topicStr;
           if (lp.started) {
             const catIdx = getActiveLpCatForUser(us);
-            const passed = (lp.passed || []).length;
-            const total = PRESET_CATEGORIES.length;
             if (catIdx >= 0) {
               const cat = PRESET_CATEGORIES[catIdx];
               const studiedMs = (lp.studyMs || {})[catIdx] || 0;
-              // If this is current user, add active session
+              // If this is current user, add active session (monotonic clock —
+              // see creditTimeMs — so a changed system clock can't skew this)
               const isCurrentUser = us.name === getCurName();
-              const currentMs = (isCurrentUser && studySessionStart !== null && !freeMode)
-                ? studiedMs + (now - studySessionStart) : studiedMs;
-              const leftMs = Math.max(0, LP_MS - currentMs);
+              const currentMs = (isCurrentUser && studySessionStartPerf !== null)
+                ? studiedMs + Math.max(0, performance.now() - studySessionStartPerf) : studiedMs;
+              const wordsDone = (lp.passed || []).includes(catIdx);
+              const phrasesDone = (lp.passedPhrases || []).includes(catIdx);
+              const wordsReady = wordsDone || currentMs >= LP_MS_WORDS;
+              const phrasesReady = phrasesDone || currentMs >= LP_MS_WORDS + LP_MS_PHRASES;
               const pct = Math.min(100, Math.round(currentMs / LP_MS * 100));
-              const ready = currentMs >= LP_MS;
+              const wordsLabel = wordsDone ? '✅' : (wordsReady ? '📝 tayyor' : '📝 ' + msToHMS(LP_MS_WORDS - currentMs));
+              const phrasesLabel = phrasesDone ? '✅' : (phrasesReady ? '💬 tayyor' : !wordsReady ? '💬 —' : '💬 ' + msToHMS(LP_MS_WORDS + LP_MS_PHRASES - currentMs));
               lpHtml = `<div class="admin-lp-row">
                 <span class="admin-lp-cat">${cat.name}</span>
-                <span class="admin-lp-time" style="color:${ready ? 'var(--accent3)' : 'var(--accent2)'}">${ready ? '✅ Tayyor' : '⏱ ' + msToHMS(leftMs)}</span>
+                <span class="admin-lp-time" style="color:${(wordsReady && phrasesReady) ? 'var(--accent3)' : 'var(--accent2)'}">${wordsLabel} · ${phrasesLabel}</span>
                 <div class="admin-lp-bar"><div style="width:${pct}%;height:100%;background:var(--accent2);border-radius:3px;transition:none"></div></div>
               </div>`;
+              topicStr = `📍 ${cat.name} · ${units.done}/${units.total}`;
             } else {
               lpHtml = `<div class="admin-lp-row"><span class="admin-lp-cat" style="color:var(--accent3)">✅ Tugadi</span></div>`;
+              topicStr = units.done >= units.total ? `🏆 Barchasi tugadi · ${units.done}/${units.total}` : `🆓 Tanlanmagan · ${units.done}/${units.total}`;
             }
-            lpHtml = `<div class="admin-lp-wrap">📚 ${passed}/${total} · ${lpHtml}</div>`;
           } else {
             lpHtml = `<div class="admin-lp-wrap" style="color:var(--text-muted);font-size:0.7rem">O'quv yo'li boshlanmagan</div>`;
+            topicStr = `— · ${units.done}/${units.total}`;
           }
 
-          const blitzStr = `⚡${us.blitzBest||0}`;
-          const quizStr = `🧠${us.quizCorrect||0}`;
-          const wordStr = `📖${us.wordsTotal||0}`;
-          const fcStr = `🃏${us.fcReviewed||0}`;
+          const timeStr = `D/${fmtDur(getTodayMs(us))} · W/${fmtDur(getWeekMs(us))} · M/${fmtDur(getMonthMs(us))}`;
           const delBtn = isOwnerUser ? '' : `<button class="admin-del-btn" onclick="adminDeleteUser('${us.name.replace(/'/g,"\\'")}')" title="O'chirish">🗑</button>`;
           const safeName = us.name.replace(/'/g,"\\'");
           const ctrlBtn = isOwnerUser ? '' : `<button class="admin-speed-btn" onclick="openAdminControl('${safeName}')" title="Boshqarish" style="font-size:0.85rem">⚙️</button>`;
@@ -3669,7 +4209,8 @@ brave - jasur - showing courage"></textarea>
               ${ctrlBtn}${delBtn}
             </div>
             ${lpHtml}
-            <div class="admin-stats-mini">${blitzStr} ${quizStr} ${wordStr} ${fcStr}</div>
+            <div class="admin-stats-mini">${topicStr}</div>
+            <div class="admin-stats-mini" style="margin-top:2px">${timeStr}</div>
           </div>`;
         }).join('');
 
@@ -3683,6 +4224,29 @@ brave - jasur - showing courage"></textarea>
           <div class="admin-cards">${rows}</div>`;
       }
 
+      // Owner-only: wipe the CURRENT (owner) account back to a fresh state —
+      // points, achievements, LP progress, all stats — for repeated testing.
+      // Wipes the CURRENT logged-in account back to a fresh state — points,
+      // achievements, LP progress, all stats — for any user, not just owner.
+      function resetCurrentUserProgress() {
+        if (!confirm("Rostan ham progressingizni TO'LIQ RESET qilmoqchimisiz?\nBarcha ball, yutuq, statistika va o'quv yo'li progressi butunlay o'chadi.")) return;
+        const name = getCurName();
+        const u = getCurUser();
+        if (!u) return;
+        // Note: owner keeps full category access regardless of lp.started —
+        // isCatUnlocked/isExamReady/catWaitMs all special-case isOwner() — so
+        // resetting owner to a genuinely fresh lp.started:false is safe and
+        // lets the "start learning" hero reappear to test onboarding again.
+        const fresh = defaultUser(name);
+        fresh.pw = u.pw;
+        saveCurUser(fresh);
+        updateProfileUI();
+        updatePointsDisplay();
+        renderPresetSidebar();
+        renderProfileDropdown(getCurUser());
+        showAchievementToast({ icon: '🔄', name: 'Reset qilindi', desc: "Progress to'liq tozalandi" });
+      }
+
       function adminDeleteUser(name) {
         if (name === OWNER_NAME) return;
         if (!confirm(`"${name}" akkauntini o'chirasizmi?`)) return;
@@ -3693,64 +4257,8 @@ brave - jasur - showing courage"></textarea>
         toggleProfileDropdown();
       }
 
-      function openAdminControl(name) {
-        document.getElementById('adminCtrlModal')?.remove();
-        const all = getUsers();
-        const u = all[name]; if (!u) return;
-        const lp = u.lp || {};
-        const lpStarted = lp.started;
-        const modal = document.createElement('div');
-        modal.id = 'adminCtrlModal';
-        modal.className = 'modal-overlay';
-        modal.innerHTML = `
-          <div class="modal-box" style="max-width:320px">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-              <div class="modal-title" style="font-size:1.3rem">⚙️ ${name}</div>
-              <button onclick="document.getElementById('adminCtrlModal').remove()" style="background:none;border:1.5px solid var(--border);border-radius:8px;color:var(--text-muted);width:32px;height:32px;cursor:pointer;font-size:1rem">✕</button>
-            </div>
-            ${lpStarted ? `
-            <div style="font-size:0.72rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:.05em;margin-bottom:8px">O'QUV YO'LI VAQTI</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">
-              <button onclick="adminAdjustWait('${name}',0)" style="background:linear-gradient(135deg,var(--accent3),var(--accent));border:none;border-radius:9px;color:#fff;font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">⚡ 0 ga tushir</button>
-              <button onclick="adminAdjustWait('${name}',10*60*1000)" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">+10 daqiqa</button>
-              <button onclick="adminAdjustWait('${name}',-10*60*1000)" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">-10 daqiqa</button>
-              <button onclick="adminAdjustWait('${name}',60*60*1000)" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">+1 soat</button>
-              <button onclick="adminAdjustWait('${name}',-60*60*1000)" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">-1 soat</button>
-              <button onclick="adminAdjustWait('${name}','exam10')" style="background:color-mix(in srgb,var(--accent2) 15%,var(--surface2));border:1.5px solid var(--accent2);border-radius:9px;color:var(--accent2);font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:9px 6px;cursor:pointer">📝 10 daqiqa</button>
-            </div>` : `<div style="color:var(--text-muted);font-size:0.85rem;margin-bottom:14px;text-align:center">O'quv yo'li boshlanmagan</div>`}
-            <div style="font-size:0.72rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:.05em;margin-bottom:8px">BOSHQA</div>
-            <button onclick="adminDeleteUser('${name}');document.getElementById('adminCtrlModal')?.remove()" style="width:100%;background:color-mix(in srgb,var(--accent2) 12%,var(--surface2));border:1.5px solid var(--accent2);border-radius:9px;color:var(--accent2);font-size:0.85rem;font-weight:600;font-family:'DM Sans',sans-serif;padding:10px;cursor:pointer">🗑 Akkauntni o'chirish</button>
-          </div>`;
-        document.body.appendChild(modal);
-        modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
-      }
-
-      function adminAdjustWait(name, delta) {
-        if (name === OWNER_NAME) return;
-        const all = getUsers();
-        const u = all[name]; if (!u) return;
-        const lp = u.lp; if (!lp || !lp.started) return;
-        if (!lp.studyMs) lp.studyMs = {};
-        const passed = new Set(lp.passed || []);
-        for (let i = 0; i <= (lp.unlocked ?? -1); i++) {
-          if (!passed.has(i)) {
-            const cur = lp.studyMs[String(i)] || 0;
-            if (delta === 0 || delta === '0') {
-              lp.studyMs[String(i)] = LP_MS; // set to full = exam unlocks
-            } else if (delta === 'exam10') {
-              // Set studyMs so exactly 10 min remains
-              lp.studyMs[String(i)] = LP_MS - 10 * 60 * 1000;
-            } else {
-              lp.studyMs[String(i)] = Math.max(0, Math.min(LP_MS, cur + delta));
-            }
-            break;
-          }
-        }
-        u.lp = lp; all[name] = u;
-        saveUsers(all);
-        document.getElementById('adminCtrlModal')?.remove();
-        showAchievementToast({ icon:'⚙️', name:'Yangilandi', desc:`${name} uchun vaqt o'zgartirildi` });
-        // Refresh admin panel
+      // ──────────── ADMIN: full control over any account ────────────────
+      function adminRefreshCards() {
         const dd = document.getElementById('profileDropdown');
         if (dd && dd.style.display !== 'none') {
           const sec = dd.querySelector('.admin-cards');
@@ -3761,6 +4269,241 @@ brave - jasur - showing courage"></textarea>
             if (nc) sec.outerHTML = nc.outerHTML;
           }
         }
+      }
+
+      function openAdminControl(name) {
+        document.getElementById('adminCtrlModal')?.remove();
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const modal = document.createElement('div');
+        modal.id = 'adminCtrlModal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+          <div class="modal-box" style="max-width:380px;max-height:85vh;overflow-y:auto">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div class="modal-title" style="font-size:1.3rem">⚙️ ${name}</div>
+              <button onclick="document.getElementById('adminCtrlModal').remove()" class="admin-modal-x">✕</button>
+            </div>
+
+            <button class="admin-quick-btn accent3" style="width:100%;margin-bottom:14px" onclick="openUserStatsModal('${name}')">📊 Statistikasini ko'rish</button>
+
+            <div class="admin-section-label">TEZKOR AMALLAR</div>
+            <div class="admin-quick-grid">
+              <button class="admin-quick-btn accent3" onclick="adminUnlockAll('${name}')">🔓 Hammasini ochish</button>
+              <button class="admin-quick-btn" onclick="adminResetLP('${name}')">🔒 O'quv yo'lini reset</button>
+              <button class="admin-quick-btn accent2" onclick="adminFullReset('${name}')">🔄 To'liq reset</button>
+              <button class="admin-quick-btn accent2" onclick="adminDeleteUser('${name}');document.getElementById('adminCtrlModal')?.remove()">🗑 O'chirish</button>
+            </div>
+
+            <div class="admin-section-label">TURKUM BOSHQARUVI</div>
+            <select id="adminCatSelect" class="admin-select" onchange="adminRenderCatControls('${name}')">
+              ${PRESET_CATEGORIES.map((c, i) => `<option value="${i}">${c.name}</option>`).join('')}
+            </select>
+            <div id="adminCatControls"></div>
+
+            <div class="admin-section-label">BALL VA YUTUQLAR</div>
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <input type="number" id="adminPtsInput" placeholder="Miqdor..." class="admin-input" />
+              <button class="admin-quick-btn" style="flex:0 0 auto;padding:0 12px" onclick="adminAddPoints('${name}',1)">+ Qo'sh</button>
+              <button class="admin-quick-btn" style="flex:0 0 auto;padding:0 12px" onclick="adminAddPoints('${name}',-1)">− Ayir</button>
+            </div>
+            <div class="admin-quick-grid">
+              <button class="admin-quick-btn accent3" onclick="adminGrantAllAch('${name}')">🏆 Barcha yutuqlar</button>
+              <button class="admin-quick-btn" onclick="adminClearAch('${name}')">🧹 Yutuqlarni tozalash</button>
+            </div>
+          </div>`;
+        document.body.appendChild(modal);
+        modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+        adminRenderCatControls(name);
+      }
+
+      function adminRenderCatControls(name) {
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const lp = getLp(u);
+        const sel = document.getElementById('adminCatSelect');
+        const i = parseInt(sel.value, 10);
+        const wordsPassed = (lp.passed || []).includes(i);
+        const phrasesPassed = (lp.passedPhrases || []).includes(i);
+        const forced = (lp.forceUnlocked || []).includes(i);
+        const unlocked = isCatUnlockedFor(u, i);
+        const isActivePick = lp.active === i;
+        const studyMs = (lp.studyMs || {})[String(i)] || 0;
+        const wordsRemainMs = Math.max(0, LP_MS_WORDS - studyMs);
+        const phrasesRemainMs = Math.max(0, (LP_MS_WORDS + LP_MS_PHRASES) - studyMs);
+        const phrasesLine = wordsRemainMs > 0
+          ? `💬 Gap uchun: <span style="color:var(--text-muted)">so'z tugagach boshlanadi (+2 soat)</span>`
+          : `💬 Gap uchun qolgan: <strong style="color:var(--accent2)">${fmtCountdown(phrasesRemainMs)}</strong>`;
+        const box = document.getElementById('adminCatControls');
+        if (!box) return;
+        box.innerHTML = `
+          <div style="font-size:0.75rem;color:var(--text-muted);margin:8px 0;line-height:1.6">
+            ${isActivePick ? `<div style="color:var(--accent3);margin-bottom:4px">👉 Foydalanuvchi hozir shu bo'limni tanlagan</div>` : ''}
+            ${unlocked
+              ? `📝 So'z uchun qolgan: <strong style="color:var(--accent2)">${fmtCountdown(wordsRemainMs)}</strong><br>${phrasesLine}`
+              : "🔒 Bu turkum hali qulflangan (boshqa bo'lim band)"}
+          </div>
+          <button class="admin-quick-btn ${forced ? 'accent2' : ''}" style="width:100%;margin-bottom:8px" onclick="adminToggleUnlock('${name}',${i})">${forced ? "🔒 Ushbu turkumni yopish" : "🔓 Faqat shu turkumni ochish"}</button>
+          <div class="admin-quick-grid" style="margin-bottom:8px">
+            <button class="admin-quick-btn" onclick="adminAdjustCatTime('${name}',${i},10*60*1000)">+10 daqiqa</button>
+            <button class="admin-quick-btn" onclick="adminAdjustCatTime('${name}',${i},-10*60*1000)">-10 daqiqa</button>
+            <button class="admin-quick-btn" onclick="adminAdjustCatTime('${name}',${i},60*60*1000)">+1 soat</button>
+            <button class="admin-quick-btn" onclick="adminAdjustCatTime('${name}',${i},-60*60*1000)">-1 soat</button>
+          </div>
+          <div class="admin-quick-grid">
+            <button class="admin-quick-btn ${wordsPassed ? 'accent2' : 'accent3'}" onclick="adminToggleTrack('${name}',${i},'words')">${wordsPassed ? "❌ So'zni bekor qilish" : "✅ So'zni o'tkazish"}</button>
+            <button class="admin-quick-btn ${phrasesPassed ? 'accent2' : 'accent3'}" onclick="adminToggleTrack('${name}',${i},'phrases')">${phrasesPassed ? '❌ Gapni bekor qilish' : "✅ Gapni o'tkazish"}</button>
+          </div>`;
+      }
+
+      function adminAdjustCatTime(name, catIdx, delta) {
+        if (name === OWNER_NAME) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const lp = getLp(u);
+        if (!lp.studyMs) lp.studyMs = {};
+        const cur = lp.studyMs[String(catIdx)] || 0;
+        lp.studyMs[String(catIdx)] = Math.max(0, Math.min(LP_MS, cur + delta));
+        u.lp = lp; u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        adminRenderCatControls(name);
+        adminRefreshCards();
+      }
+
+      // Force-unlock (or re-lock) exactly ONE category for this account,
+      // independent of the sequential lp.unlocked threshold — does NOT
+      // cascade to unlock any category before or after it.
+      function adminToggleUnlock(name, catIdx) {
+        if (name === OWNER_NAME) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const lp = getLp(u);
+        lp.started = true;
+        const idx = lp.forceUnlocked.indexOf(catIdx);
+        if (idx >= 0) lp.forceUnlocked.splice(idx, 1);
+        else lp.forceUnlocked.push(catIdx);
+        u.lp = lp; u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        adminRenderCatControls(name);
+        adminRefreshCards();
+      }
+
+      // Toggle a specific category's Words or Phrases completion on/off for
+      // any account — "open" a passed exam back up, or force-pass one.
+      // Only ever touches catIdx itself: never advances lp.unlocked, so it
+      // can't cascade-unlock neighboring categories.
+      function adminToggleTrack(name, catIdx, track) {
+        if (name === OWNER_NAME) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const lp = getLp(u);
+        if (track === 'words') {
+          const idx = lp.passed.indexOf(catIdx);
+          if (idx >= 0) {
+            lp.passed.splice(idx, 1);
+          } else {
+            lp.started = true;
+            if (!lp.passed.includes(catIdx)) lp.passed.push(catIdx);
+            if (!lp.forceUnlocked.includes(catIdx)) lp.forceUnlocked.push(catIdx);
+          }
+        } else {
+          const idx = lp.passedPhrases.indexOf(catIdx);
+          if (idx >= 0) lp.passedPhrases.splice(idx, 1);
+          else {
+            lp.started = true;
+            if (!lp.passedPhrases.includes(catIdx)) lp.passedPhrases.push(catIdx);
+            if (!lp.forceUnlocked.includes(catIdx)) lp.forceUnlocked.push(catIdx);
+          }
+        }
+        releaseActiveIfDone(lp);
+        u.lp = lp; u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        adminRenderCatControls(name);
+        adminRefreshCards();
+      }
+
+      function adminUnlockAll(name) {
+        if (name === OWNER_NAME) return;
+        if (!confirm(`"${name}" uchun BARCHA turkumlarni (So'z va Gap) to'liq o'tkazib yuborasizmi?`)) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const lp = getLp(u);
+        const allIdx = [...Array(PRESET_CATEGORIES.length).keys()];
+        lp.started = true;
+        lp.unlocked = PRESET_CATEGORIES.length - 1;
+        lp.active = -1;
+        lp.passed = allIdx;
+        lp.passedPhrases = [...allIdx];
+        u.lp = lp; u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        showAchievementToast({ icon: '🔓', name: 'Ochildi', desc: `${name} uchun barcha turkumlar to'liq ochildi` });
+        openAdminControl(name);
+        adminRefreshCards();
+      }
+
+      function adminResetLP(name) {
+        if (name === OWNER_NAME) return;
+        if (!confirm(`"${name}" ning o'quv yo'li progressini reset qilasizmi? (Boshqa statistikalar saqlanadi)`)) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        u.lp = { started: false, unlocked: -1, active: -1, startTimes: {}, passed: [], passedPhrases: [], forceUnlocked: [], studyMs: {} };
+        u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        showAchievementToast({ icon: '🔒', name: 'Reset qilindi', desc: `${name} ning o'quv yo'li tozalandi` });
+        openAdminControl(name);
+        adminRefreshCards();
+      }
+
+      function adminFullReset(name) {
+        if (name === OWNER_NAME) return;
+        if (!confirm(`"${name}" ning HAMMA narsasini (ball, yutuq, statistika, o'quv yo'li) to'liq reset qilasizmi?`)) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        const fresh = defaultUser(name);
+        fresh.pw = u.pw;
+        all[name] = fresh;
+        saveUsers(all);
+        showAchievementToast({ icon: '🔄', name: 'Reset qilindi', desc: `${name} to'liq tozalandi` });
+        document.getElementById('adminCtrlModal')?.remove();
+        adminRefreshCards();
+      }
+
+      function adminAddPoints(name, sign) {
+        if (name === OWNER_NAME) return;
+        const inp = document.getElementById('adminPtsInput');
+        const amt = parseFloat(inp.value);
+        if (!amt || amt <= 0) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        u.points = Math.max(0, (u.points || 0) + sign * amt);
+        u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        inp.value = '';
+        showAchievementToast({ icon: '💰', name: 'Yangilandi', desc: `${name} uchun ball ${sign > 0 ? "qo'shildi" : 'ayirildi'}` });
+        adminRefreshCards();
+      }
+
+      function adminGrantAllAch(name) {
+        if (name === OWNER_NAME) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        u.achievements = ACHIEVEMENTS.map(a => a.id);
+        u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        showAchievementToast({ icon: '🏆', name: 'Berildi', desc: `${name} ga barcha yutuqlar berildi` });
+        adminRefreshCards();
+      }
+
+      function adminClearAch(name) {
+        if (name === OWNER_NAME) return;
+        if (!confirm(`"${name}" ning barcha yutuqlarini tozalaysizmi?`)) return;
+        const all = getUsers();
+        const u = all[name]; if (!u) return;
+        u.achievements = [];
+        u.updatedAt = Date.now(); all[name] = u;
+        saveUsers(all);
+        showAchievementToast({ icon: '🧹', name: 'Tozalandi', desc: `${name} ning yutuqlari tozalandi` });
+        adminRefreshCards();
       }
 
       function openPointsShop() {
@@ -3792,17 +4535,16 @@ brave - jasur - showing courage"></textarea>
         const lp = getLp(u);
         if (!lp.started) { showAchievementToast({ icon:'❌', name:'O\'quv yo\'li boshlanmagan', desc:'Avval o\'qishni boshlang' }); return; }
         spendPoints(cost, `-${reduceMs/60000} daqiqa qisqartirildi`, () => {
-          const passed = new Set(lp.passed || []);
-          for (let i = 0; i < PRESET_CATEGORIES.length; i++) {
-            if (!passed.has(i) && i <= (lp.unlocked ?? -1)) {
-              if (!lp.studyMs) lp.studyMs = {};
-              const cur = lp.studyMs[String(i)] || 0;
-              lp.studyMs[String(i)] = Math.min(LP_MS, cur + reduceMs);
-              u.lp = lp;
-              saveCurUser(u);
-              renderProfileDropdown(u);
-              break;
-            }
+          const i = getActiveLpCat();
+          if (i >= 0) {
+            if (!lp.studyMs) lp.studyMs = {};
+            const cur = lp.studyMs[String(i)] || 0;
+            lp.studyMs[String(i)] = Math.min(LP_MS, cur + reduceMs);
+            u.lp = lp;
+            saveCurUser(u);
+            renderProfileDropdown(u);
+          } else {
+            showAchievementToast({ icon: 'ℹ️', name: 'Hozircha kerak emas', desc: "Avval biror turkumni tanlang" });
           }
         });
         const modal = document.getElementById('pointsShopModal');
@@ -3811,32 +4553,6 @@ brave - jasur - showing courage"></textarea>
             const nu = getCurUser(); el.textContent = nu ? (nu.points||0) : 0;
           });
         }
-      }
-
-      function adminReduceWait(name) {
-        if (name === OWNER_NAME) return;
-        const all = getUsers();
-        const u = all[name]; if (!u) return;
-        const lp = u.lp; if (!lp || !lp.started) return;
-        if (!lp.studyMs) lp.studyMs = {};
-        // Find the active (not passed) unlocked category
-        const passed = new Set(lp.passed || []);
-        let found = false;
-        for (let i = 0; i <= (lp.unlocked ?? -1); i++) {
-          if (!passed.has(i)) {
-            // Set studyMs to LP_MS so countdown reaches 0
-            lp.studyMs[String(i)] = LP_MS;
-            found = true;
-            break;
-          }
-        }
-        if (!found) return;
-        u.lp = lp;
-        all[name] = u;
-        saveUsers(all);
-        showAchievementToast({ icon:'⚡', name:'Tezlashtirildi', desc:`${name} uchun kutish vaqti nolga tushirildi` });
-        toggleProfileDropdown();
-        toggleProfileDropdown();
       }
 
       function grantAchievement(id) {
@@ -3852,7 +4568,7 @@ brave - jasur - showing courage"></textarea>
       function showAchievementToast(ach) {
         if (!ach) return;
         const t = document.createElement('div');
-        t.style.cssText = `position:fixed;top:22px;right:22px;
+        t.style.cssText = `position:fixed;top:14px;right:76px;
           background:var(--surface-solid);border:1px solid var(--accent);border-radius:14px;
           padding:13px 18px;display:flex;align-items:center;gap:12px;
           box-shadow:0 8px 32px rgba(0,0,0,0.55),0 0 20px var(--accent-glow);z-index:3000;
@@ -3866,12 +4582,123 @@ brave - jasur - showing courage"></textarea>
       }
 
       // ──────────── LEARNING PATH ────────────────
-      const LP_HOURS = 4;
-      const LP_MS = LP_HOURS * 3600 * 1000;
+      // Words and Phrases each have their own 2h study gate, tracked off the
+      // same ambient studyMs clock: the words exam unlocks at the 2h mark,
+      // the phrases exam unlocks 2h after that (4h cumulative).
+      const LP_HOURS_WORDS = 2;
+      const LP_MS_WORDS = LP_HOURS_WORDS * 3600 * 1000;
+      const LP_HOURS_PHRASES = 2;
+      const LP_MS_PHRASES = LP_HOURS_PHRASES * 3600 * 1000;
+      const LP_MS = LP_MS_WORDS + LP_MS_PHRASES;
       let lpCountdownRef = null;
       let adminRefreshRef = null;
       let studySessionStart = null;
+      let studySessionStartPerf = null;
+      let appSessionStart = null;
+      let appSessionStartPerf = null;
       let _isOnline = navigator.onLine;
+
+      // ──────────── TOTAL TIME IN APP (per account, all-time + daily) ────────────
+      // Elapsed duration is measured with performance.now() — a monotonic clock
+      // that the browser guarantees never jumps or runs backward, unlike
+      // Date.now(). So manually changing the system clock mid-session (or the
+      // clock auto-adjusting for DST/timezone/NTP) can't inflate, zero out, or
+      // corrupt the recorded time. Date.now() is only used to pick which
+      // calendar day a finished chunk gets filed under (dailyMs) — a far
+      // lower-stakes use where the worst case is a few seconds landing in the
+      // adjacent day, not a fabricated multi-hour session.
+      const SESSION_CHUNK_CAP_MS = 3600000; // defense in depth: never credit >1h from a single flush
+
+      function todayKey() { return new Date().toISOString().slice(0, 10); }
+
+      function creditTimeMs(u, rawMs) {
+        if (!(rawMs > 0)) return; // guards NaN and negative/zero
+        const ms = Math.min(rawMs, SESSION_CHUNK_CAP_MS);
+        u.totalMs = (u.totalMs || 0) + ms;
+        if (!u.dailyMs) u.dailyMs = {};
+        const k = todayKey();
+        u.dailyMs[k] = (u.dailyMs[k] || 0) + ms;
+      }
+
+      function startAppSession() {
+        if (appSessionStart !== null) return;
+        if (!getCurUser()) return;
+        appSessionStart = Date.now();
+        appSessionStartPerf = performance.now();
+      }
+      function pauseAppSession() {
+        if (appSessionStart === null) return Promise.resolve();
+        const u = getCurUser();
+        let p = Promise.resolve();
+        if (u) {
+          creditTimeMs(u, performance.now() - appSessionStartPerf);
+          p = saveCurUser(u);
+        }
+        appSessionStart = null;
+        appSessionStartPerf = null;
+        return p;
+      }
+      // Flush accumulated time to storage/cloud without ending the session —
+      // called periodically so an abrupt close (mobile OS killing a backgrounded
+      // tab/app before pauseAppSession's async write finishes) loses at most one
+      // heartbeat's worth of progress instead of the whole session.
+      function checkpointAppSession() {
+        if (appSessionStart === null) return;
+        const u = getCurUser();
+        if (u) {
+          creditTimeMs(u, performance.now() - appSessionStartPerf);
+          saveCurUser(u);
+        }
+        appSessionStart = Date.now();
+        appSessionStartPerf = performance.now();
+      }
+      function getTotalMs(u) {
+        u = u || getCurUser(); if (!u) return 0;
+        const base = u.totalMs || 0;
+        if (appSessionStartPerf !== null && u.name === getCurName()) {
+          return base + Math.max(0, performance.now() - appSessionStartPerf);
+        }
+        return base;
+      }
+      // Sum of dailyMs over the last `days` calendar days including today
+      // (UTC day boundary, matching todayKey/createdAt elsewhere in the app),
+      // plus the live in-progress chunk if this is the logged-in user on this
+      // device (other accounts have no local session to add).
+      function getRangeMs(u, days) {
+        u = u || getCurUser(); if (!u) return 0;
+        const dm = u.dailyMs || {};
+        let sum = 0;
+        const base = new Date();
+        for (let i = 0; i < days; i++) {
+          const d = new Date(base);
+          d.setUTCDate(d.getUTCDate() - i);
+          sum += dm[d.toISOString().slice(0, 10)] || 0;
+        }
+        if (appSessionStartPerf !== null && u.name === getCurName()) {
+          sum += Math.max(0, performance.now() - appSessionStartPerf);
+        }
+        return sum;
+      }
+      function getTodayMs(u) { return getRangeMs(u, 1); }
+      function getWeekMs(u) { return getRangeMs(u, 7); }
+      function getMonthMs(u) { return getRangeMs(u, 30); }
+      function fmtHM(ms) {
+        const mins = Math.floor(ms / 60000);
+        const h = Math.floor(mins / 60), m = mins % 60;
+        return h > 0 ? `${h}s ${m}d` : `${m}d`;
+      }
+      // Compact duration: under an hour → "13m"; an hour or more → "1h.12m".
+      function fmtDur(ms) {
+        const mins = Math.floor(ms / 60000);
+        if (mins < 60) return `${mins}m`;
+        const h = Math.floor(mins / 60), m = mins % 60;
+        return `${h}h.${m}m`;
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pauseAppSession();
+        else startAppSession();
+      });
+      window.addEventListener('beforeunload', pauseAppSession);
 
       window.addEventListener('offline', () => {
         _isOnline = false;
@@ -3886,55 +4713,78 @@ brave - jasur - showing courage"></textarea>
         if (u && getLp(u).started && !lpCountdownRef) startLpCountdown();
       });
 
+      // The category the learner has actively chosen to study (via clicking
+      // it while in free-pick state) — ambient app time accrues to this one.
+      // -1 when nothing is chosen yet, or once the pick is fully done.
       function getActiveLpCat() {
         const u = getCurUser(); if (!u) return -1;
         const lp = getLp(u);
         if (!lp.started) return -1;
-        for (let i = lp.unlocked; i >= 0; i--) {
-          if (!lp.passed.includes(i)) return i;
+        if (lp.active !== undefined && lp.active !== null && lp.active >= 0 &&
+          !(lp.passed.includes(lp.active) && lp.passedPhrases.includes(lp.active))) {
+          return lp.active;
         }
         return -1;
       }
 
-      let freeMode = false;
-
-      function toggleFreeMode() {
-        freeMode = !freeMode;
-        document.getElementById('freeModeBtn').classList.toggle('active', freeMode);
-        document.getElementById('freeModeBanner').style.display = freeMode ? 'block' : 'none';
-        if (freeMode) pauseStudySession();
-        else startStudySession();
-      }
-
       function startStudySession() {
-        if (freeMode) return;
         if (studySessionStart !== null) return;
         const u = getCurUser(); if (!u) return;
         if (!getLp(u).started) return;
         studySessionStart = Date.now();
+        studySessionStartPerf = performance.now();
+      }
+
+      // Study time gates when exams unlock, so it gets the same monotonic-clock
+      // protection as total app time (see creditTimeMs above) — jumping the
+      // system clock forward can't fast-forward an exam unlock.
+      function creditStudyMs(lp, cat, rawMs) {
+        if (!(rawMs > 0)) return;
+        const ms = Math.min(rawMs, SESSION_CHUNK_CAP_MS);
+        if (!lp.studyMs) lp.studyMs = {};
+        lp.studyMs[cat] = (lp.studyMs[cat] || 0) + ms;
       }
 
       function pauseStudySession() {
+        if (studySessionStart === null) return Promise.resolve();
+        const u = getCurUser();
+        let p = Promise.resolve();
+        if (u) {
+          const lp = getLp(u);
+          const cat = getActiveLpCat();
+          if (cat >= 0) {
+            creditStudyMs(lp, cat, performance.now() - studySessionStartPerf);
+            u.lp = lp; p = saveCurUser(u);
+          }
+        }
+        studySessionStart = null;
+        studySessionStartPerf = null;
+        return p;
+      }
+      // Same idea as checkpointAppSession: flush lp.studyMs periodically instead
+      // of only on hide/unload, so a killed tab/app can't wipe out an entire
+      // study session's progress.
+      function checkpointStudySession() {
         if (studySessionStart === null) return;
         const u = getCurUser();
         if (u) {
           const lp = getLp(u);
           const cat = getActiveLpCat();
           if (cat >= 0) {
-            if (!lp.studyMs) lp.studyMs = {};
-            lp.studyMs[cat] = (lp.studyMs[cat] || 0) + (Date.now() - studySessionStart);
+            creditStudyMs(lp, cat, performance.now() - studySessionStartPerf);
             u.lp = lp; saveCurUser(u);
           }
         }
-        studySessionStart = null;
+        studySessionStart = Date.now();
+        studySessionStartPerf = performance.now();
       }
 
       function getStudyMs(catIdx) {
         const u = getCurUser(); if (!u) return 0;
         const lp = getLp(u);
         const saved = (lp.studyMs && lp.studyMs[catIdx]) || 0;
-        if (studySessionStart !== null && getActiveLpCat() === catIdx) {
-          return saved + (Date.now() - studySessionStart);
+        if (studySessionStartPerf !== null && getActiveLpCat() === catIdx) {
+          return saved + Math.max(0, performance.now() - studySessionStartPerf);
         }
         return saved;
       }
@@ -3944,38 +4794,60 @@ brave - jasur - showing courage"></textarea>
           pauseStudySession();
           if (lpCountdownRef) { clearInterval(lpCountdownRef); lpCountdownRef = null; }
         } else {
-          if (!freeMode) startStudySession();
-          if (_isOnline) {
-            const u = getCurUser();
-            if (u && getLp(u).started) startLpCountdown();
-          }
+          startStudySession();
+          const u = getCurUser();
+          if (u && getLp(u).started) startLpCountdown();
         }
       });
       window.addEventListener('beforeunload', pauseStudySession);
 
       function getLp(u) {
-        if (!u.lp) u.lp = { started: false, unlocked: -1, startTimes: {}, passed: [] };
+        if (!u.lp) u.lp = { started: false, unlocked: -1, startTimes: {}, passed: [], passedPhrases: [] };
         if (!Array.isArray(u.lp.passed)) u.lp.passed = [];
+        if (!Array.isArray(u.lp.passedPhrases)) u.lp.passedPhrases = [];
+        if (!Array.isArray(u.lp.forceUnlocked)) u.lp.forceUnlocked = [];
         if (!u.lp.startTimes) u.lp.startTimes = {};
         if (!u.lp.studyMs) u.lp.studyMs = {};
+        if (u.lp.active === undefined) {
+          // One-time migration from the old sequential model: carry over
+          // whichever category was "current" under lp.unlocked if it's still
+          // incomplete, otherwise start in free-pick state (nothing chosen).
+          const legacy = u.lp.unlocked;
+          u.lp.active = (typeof legacy === 'number' && legacy >= 0 &&
+            !(u.lp.passed.includes(legacy) && u.lp.passedPhrases.includes(legacy))) ? legacy : -1;
+        }
         return u.lp;
       }
 
+      // A category is unlocked if: the whole plan hasn't started yet (nothing
+      // gated pre-start), an admin force-unlocked exactly this one category,
+      // it's already fully completed (kept open for review), it's the one
+      // category the learner has actively chosen to work on, or nothing is
+      // currently chosen (free-pick state — any not-yet-done category is
+      // fair game). Users pick their own order; picking one locks the rest
+      // until that pick's words AND phrases are both done.
+      function isCatUnlockedFor(u, idx) {
+        const lp = getLp(u);
+        if (!lp.started) return true;
+        if (lp.forceUnlocked.includes(idx)) return true;
+        if (lp.passed.includes(idx) && lp.passedPhrases.includes(idx)) return true;
+        if (lp.active === idx) return true;
+        if (lp.active === undefined || lp.active === null || lp.active < 0) return true;
+        return false;
+      }
       function isCatUnlocked(idx) {
         if (isOwner()) return true;
         const u = getCurUser(); if (!u) return true;
-        const lp = getLp(u);
-        if (!lp.started) return true;
-        return lp.unlocked >= idx;
+        return isCatUnlockedFor(u, idx);
       }
 
       function isExamReady(idx) {
         if (isOwner()) return isCatUnlocked(idx) && !isCatPassed(idx);
         const u = getCurUser(); if (!u) return false;
         const lp = getLp(u);
-        if (!lp.started || lp.unlocked < idx) return false;
+        if (!lp.started || !isCatUnlocked(idx)) return false;
         if (lp.passed.includes(idx)) return false;
-        return catWaitMs(idx) === 0;
+        return catWaitMsWords(idx) === 0;
       }
 
       function isCatPassed(idx) {
@@ -3983,12 +4855,48 @@ brave - jasur - showing courage"></textarea>
         return getLp(u).passed.includes(idx);
       }
 
-      function catWaitMs(idx) {
-        if (isOwner()) return 0;
-        const u = getCurUser(); if (!u) return LP_MS;
+      // Phrases ("Gaplar") completion is tracked separately from words —
+      // available as soon as the category is unlocked (no study timer of its
+      // own), so words and phrases can each be completed independently.
+      function isPhrasePassed(idx) {
+        const u = getCurUser(); if (!u) return false;
+        return getLp(u).passedPhrases.includes(idx);
+      }
+
+      function isPhraseExamReady(idx) {
+        if (isOwner()) return isCatUnlocked(idx) && !isPhrasePassed(idx);
+        const u = getCurUser(); if (!u) return false;
         const lp = getLp(u);
-        if (!lp.started || lp.unlocked < idx) return LP_MS;
-        return Math.max(0, LP_MS - getStudyMs(idx));
+        if (!lp.started || !isCatUnlocked(idx)) return false;
+        if (lp.passedPhrases.includes(idx)) return false;
+        return catWaitMsPhrases(idx) === 0;
+      }
+
+      // Total completable units across the whole plan: every category has a
+      // Words unit and a Phrases unit, so 32 categories = 64 units.
+      function lpUnitCounts(u) {
+        const lp = getLp(u);
+        const total = PRESET_CATEGORIES.length * 2;
+        const done = (lp.passed ? lp.passed.length : 0) + (lp.passedPhrases ? lp.passedPhrases.length : 0);
+        return { done, total };
+      }
+
+      // Words: ready once this category's ambient study time reaches 2h.
+      function catWaitMsWords(idx) {
+        if (isOwner()) return 0;
+        const u = getCurUser(); if (!u) return LP_MS_WORDS;
+        const lp = getLp(u);
+        if (!lp.started || !isCatUnlocked(idx)) return LP_MS_WORDS;
+        return Math.max(0, LP_MS_WORDS - getStudyMs(idx));
+      }
+
+      // Phrases: ready 2h after that — 4h cumulative on the same clock.
+      function catWaitMsPhrases(idx) {
+        if (isOwner()) return 0;
+        const u = getCurUser(); if (!u) return LP_MS_PHRASES;
+        const lp = getLp(u);
+        if (!lp.started || !isCatUnlocked(idx)) return LP_MS_PHRASES;
+        return Math.max(0, (LP_MS_WORDS + LP_MS_PHRASES) - getStudyMs(idx));
       }
 
       function fmtCountdown(ms) {
@@ -4004,8 +4912,7 @@ brave - jasur - showing courage"></textarea>
         const lp = getLp(u);
         if (lp.started) return;
         lp.started = true;
-        lp.unlocked = 0;
-        lp.startTimes['0'] = Date.now();
+        lp.active = -1; // free-pick: nothing chosen yet, learner picks their own first topic
         u.lp = lp; saveCurUser(u);
         renderProfileDropdown(getCurUser());
         startLpCountdown();
@@ -4014,17 +4921,21 @@ brave - jasur - showing courage"></textarea>
         if (typeof grantAchievement === 'function') grantAchievement('lp_started');
       }
 
+      // If the learner's active pick just became fully done (both words and
+      // phrases passed), release the lock so the remaining topics become
+      // freely selectable again.
+      function releaseActiveIfDone(lp) {
+        if (lp.active !== undefined && lp.active !== null && lp.active >= 0 &&
+          lp.passed.includes(lp.active) && lp.passedPhrases.includes(lp.active)) {
+          lp.active = -1;
+        }
+      }
+
       function unlockNextCat(currentIdx) {
         const u = getCurUser(); if (!u) return;
         const lp = getLp(u);
         if (!lp.passed.includes(currentIdx)) lp.passed.push(currentIdx);
-        const nextIdx = currentIdx + 1;
-        if (nextIdx < PRESET_CATEGORIES.length) {
-          if (lp.unlocked < nextIdx) {
-            lp.unlocked = nextIdx;
-            lp.startTimes[String(nextIdx)] = Date.now();
-          }
-        }
+        releaseActiveIfDone(lp);
         u.lp = lp; saveCurUser(u);
         renderPresetSidebar();
         renderProfileDropdown(getCurUser());
@@ -4032,95 +4943,121 @@ brave - jasur - showing courage"></textarea>
         grantAchievement('exam_passed');
       }
 
+      // Phrases exam pass — independent of the words track, so it never
+      // touches lp.active by itself except to release it once both tracks
+      // for the active pick are done.
+      function markPhrasesPassed(idx) {
+        const u = getCurUser(); if (!u) return;
+        const lp = getLp(u);
+        if (!lp.passedPhrases.includes(idx)) lp.passedPhrases.push(idx);
+        releaseActiveIfDone(lp);
+        u.lp = lp; saveCurUser(u);
+        renderPresetSidebar();
+        renderProfileDropdown(getCurUser());
+        grantAchievement('exam_passed');
+      }
+
       function startLpCountdown() {
         if (lpCountdownRef) clearInterval(lpCountdownRef);
-        refreshMainTimer(); // show immediately
         lpCountdownRef = setInterval(() => {
           const u = getCurUser();
-          if (!u) { clearInterval(lpCountdownRef); lpCountdownRef = null; refreshMainTimer(); return; }
+          if (!u) { clearInterval(lpCountdownRef); lpCountdownRef = null; return; }
           const lp = getLp(u);
-          refreshMainTimer();
           if (!lp.started) return;
-          if (!_isOnline) return;
           PRESET_CATEGORIES.forEach((_, i) => {
-            if (isCatPassed(i) || !isCatUnlocked(i)) return;
-            const wait = catWaitMs(i);
-            const el = document.getElementById('lp-badge-' + i);
-            if (el) {
-              if (wait > 0) {
-                el.textContent = fmtCountdown(wait);
-              } else {
-                const row = document.getElementById('lp-row-' + i);
-                if (row) row.outerHTML = buildLpRow(u, i);
+            if (!isCatUnlocked(i)) return;
+            if (!isCatPassed(i)) {
+              const waitW = catWaitMsWords(i);
+              const elW = document.getElementById('lp-badge-w-' + i);
+              if (elW) {
+                if (waitW > 0) elW.textContent = fmtCountdown(waitW);
+                else { const row = document.getElementById('lp-row-' + i); if (row) row.outerHTML = buildLpRow(u, i); }
+              }
+            }
+            if (!isPhrasePassed(i)) {
+              const waitP = catWaitMsPhrases(i);
+              const elP = document.getElementById('lp-badge-p-' + i);
+              if (elP) {
+                if (waitP > 0) elP.textContent = fmtCountdown(waitP);
+                else { const row = document.getElementById('lp-row-' + i); if (row) row.outerHTML = buildLpRow(u, i); }
               }
             }
           });
         }, 1000);
       }
-      function updateMainTimer(ms) {
-        /* kept for compatibility — real logic is in refreshMainTimer */
-      }
-      function refreshMainTimer() {
-        const el = document.getElementById('mainLpTimer');
-        const txt = document.getElementById('mainLpTimerText');
-        if (!el || !txt) return;
-        const u = getCurUser();
-        if (!u || !getLp(u).started) { el.style.display = 'none'; return; }
-        for (let i = 0; i < PRESET_CATEGORIES.length; i++) {
-          if (isCatPassed(i)) continue;
-          if (!isCatUnlocked(i)) { el.style.display = 'none'; return; }
-          const wait = catWaitMs(i);
-          el.style.display = 'flex';
-          if (wait <= 0) {
-            el.style.borderColor = 'color-mix(in srgb,var(--accent3) 40%,transparent)';
-            el.style.color = 'var(--accent3)';
-            txt.textContent = '📝 Tayyor!';
-          } else {
-            el.style.borderColor = 'color-mix(in srgb,var(--accent2) 40%,transparent)';
-            el.style.color = 'var(--accent2)';
-            txt.textContent = fmtCountdown(wait);
-          }
-          return;
-        }
-        el.style.display = 'none';
-      }
 
       function buildLpRow(u, i) {
-        const lp = getLp(u);
-        const passed = isCatPassed(i);
+        const wordsPassed = isCatPassed(i);
         const unlocked = isCatUnlocked(i);
-        const examReady = isExamReady(i);
-        const wait = catWaitMs(i);
+        const wordsExamReady = isExamReady(i);
+        const waitWords = catWaitMsWords(i);
+        const phrasesPassed = isPhrasePassed(i);
+        const phrasesExamReady = isPhraseExamReady(i);
+        const waitPhrases = catWaitMsPhrases(i);
         const catName = PRESET_CATEGORIES[i].name;
+
+        let wordsBadge, phrasesBadge;
+        if (!unlocked) {
+          wordsBadge = `<span class="lp-track-badge locked" title="Qulflangan">📝</span>`;
+          phrasesBadge = `<span class="lp-track-badge locked" title="Qulflangan">💬</span>`;
+        } else {
+          if (wordsPassed) {
+            wordsBadge = `<span class="lp-track-badge done" title="So'zlar imtihoni o'tildi — tayyor">📝✓</span>`;
+          } else if (wordsExamReady) {
+            wordsBadge = `<button class="lp-track-badge ready" title="So'zlar imtihoni tayyor" onclick="openExam(${i},'words');document.getElementById('profileDropdown').style.display='none'">📝</button>`;
+          } else {
+            wordsBadge = `<span class="lp-track-badge wait" id="lp-badge-w-${i}" title="So'zlarni o'rganish davom etmoqda">${fmtCountdown(waitWords)}</span>`;
+          }
+          if (phrasesPassed) {
+            phrasesBadge = `<span class="lp-track-badge done" title="Gaplar imtihoni o'tildi — tayyor">💬✓</span>`;
+          } else if (phrasesExamReady) {
+            phrasesBadge = `<button class="lp-track-badge ready" title="Gaplar imtihoni tayyor" onclick="openExam(${i},'phrases');document.getElementById('profileDropdown').style.display='none'">💬</button>`;
+          } else if (waitWords > 0) {
+            // Phrases' own 2h clock only starts once the words gate (first
+            // 2h) is cleared — show it as waiting, not a second live countdown.
+            phrasesBadge = `<span class="lp-track-badge locked" title="Avval so'zlar navbatini kuting">💬</span>`;
+          } else {
+            phrasesBadge = `<span class="lp-track-badge wait" id="lp-badge-p-${i}" title="Gaplarni o'rganish davom etmoqda">${fmtCountdown(waitPhrases)}</span>`;
+          }
+        }
+
         let cls = 'lp-cat';
-        let icon = '🔒';
-        let badge = '';
-        if (passed) { cls += ' lp-passed'; icon = '✅'; badge = `<span class="lp-badge" style="color:var(--accent3)">O'tildi</span>`; }
-        else if (!unlocked) { cls += ' lp-locked'; badge = `<span class="lp-badge">Qulflangan</span>`; }
-        else if (examReady) { cls += ' lp-active'; icon = '📝'; badge = `<button class="lp-exam-btn" onclick="openExam(${i});document.getElementById('profileDropdown').style.display='none'">Imtihon</button>`; }
-        else if (lp.startTimes[String(i)]) { cls += ' lp-active'; icon = '📖'; badge = `<span class="lp-badge lp-countdown" id="lp-badge-${i}">${fmtCountdown(wait)}</span>`; }
-        else { icon = '🔓'; badge = `<span class="lp-badge">Ochiq</span>`; }
-        const click = (unlocked && !passed) ? `onclick="loadPreset(${i});switchTab('input');document.getElementById('profileDropdown').style.display='none'"` : '';
-        return `<div class="${cls}" id="lp-row-${i}" ${click}><span class="lp-icon">${icon}</span><span class="lp-name">${catName}</span>${badge}</div>`;
+        let icon;
+        if (wordsPassed && phrasesPassed) { cls += ' lp-passed'; icon = '✅'; }
+        else if (!unlocked) { cls += ' lp-locked'; icon = '🔒'; }
+        else { cls += ' lp-active'; icon = wordsPassed ? '💬' : '📖'; }
+
+        const click = (unlocked && !wordsPassed) ? `onclick="loadPreset(${i});switchTab('input');document.getElementById('profileDropdown').style.display='none'"` : '';
+        return `<div class="${cls}" id="lp-row-${i}" ${click}>
+          <span class="lp-icon">${icon}</span>
+          <span class="lp-name">${catName}</span>
+          <div class="lp-track-badges">${wordsBadge}${phrasesBadge}</div>
+        </div>`;
       }
 
       // ──────────── EXAM ────────────────
-      const ex = { catIdx:-1, questions:[], qIdx:0, score:0, wrongCount:0, maxWrong:5 };
+      // Same quiz engine drives both the Words exam (cat.words) and the
+      // Phrases exam (PRESET_PHRASES) — ex.mode says which, so the result
+      // handler knows whether to advance the LP unlock or just mark phrases done.
+      const ex = { catIdx:-1, mode:'words', questions:[], qIdx:0, score:0, wrongCount:0, maxWrong:5 };
 
-      function openExam(catIdx) {
+      function openExam(catIdx, mode) {
+        mode = mode === 'phrases' ? 'phrases' : 'words';
         const cat = PRESET_CATEGORIES[catIdx];
         if (!cat) return;
         ex.catIdx = catIdx;
+        ex.mode = mode;
         ex.qIdx = 0;
         ex.score = 0;
         ex.wrongCount = 0;
 
+        const sourceLines = mode === 'phrases' ? (PRESET_PHRASES[cat.name] || []) : cat.words;
         const pool = [];
-        for (const line of cat.words) {
+        for (const line of sourceLines) {
           const parts = line.split(' - ');
           if (parts.length >= 2) pool.push({ word: parts[0].trim(), trans: parts[1].trim() });
         }
-        if (pool.length < 4) { alert('Bu turkumda yetarli so\'z yo\'q'); return; }
+        if (pool.length < 4) { alert('Bu turkumda yetarli ma\'lumot yo\'q'); return; }
 
         // 10% xato ruxsati (kamida 1 ta)
         ex.maxWrong = Math.max(1, Math.floor(pool.length * 0.1));
@@ -4135,7 +5072,7 @@ brave - jasur - showing courage"></textarea>
           return { q, opts, correct: opts.indexOf(q) };
         });
 
-        document.getElementById('examCatLabel').textContent = cat.name + ' · Imtihon';
+        document.getElementById('examCatLabel').textContent = cat.name + (mode === 'phrases' ? ' · 💬 Gaplar imtihoni' : ' · 📝 So\'zlar imtihoni');
         document.getElementById('examQuizSection').style.display = 'block';
         document.getElementById('examResultSection').style.display = 'none';
         document.getElementById('examModal').style.display = 'flex';
@@ -4152,9 +5089,9 @@ brave - jasur - showing courage"></textarea>
           `<button class="exam-opt-btn" onclick="answerExamQ(${i})">${o.trans}</button>`
         ).join('');
         // Wrong counter
-        const wrongLeft = ex.maxWrong - ex.wrongCount;
+        const modeIcon = ex.mode === 'phrases' ? '💬' : '📝';
         document.getElementById('examCatLabel').textContent =
-          PRESET_CATEGORIES[ex.catIdx].name + ` · ❌ ${ex.wrongCount}/${ex.maxWrong}  ✅ ${ex.score}/${ex.neededCorrect}`;
+          PRESET_CATEGORIES[ex.catIdx].name + ` · ${modeIcon} ❌ ${ex.wrongCount}/${ex.maxWrong}  ✅ ${ex.score}/${ex.neededCorrect}`;
       }
 
       function answerExamQ(chosenIdx) {
@@ -4184,27 +5121,32 @@ brave - jasur - showing courage"></textarea>
         const r = document.getElementById('examResultSection');
         r.style.display = 'block';
         const total = ex.questions.length;
+        const isPhrases = ex.mode === 'phrases';
         const emoji = passed ? '🎉' : ex.score >= ex.neededCorrect * 0.8 ? '😅' : '😔';
         const sub = passed
-          ? `Tabriklaymiz! ${ex.score}/${total} to'g'ri. Keyingi bo'lim ochildi.`
+          ? `Tabriklaymiz! ${ex.score}/${total} to'g'ri.${isPhrases ? '' : ' Keyingi bo\'lim ochildi.'}`
           : `${ex.score}/${total} to'g'ri, ${ex.wrongCount} xato. Kamida ${ex.neededCorrect} ta to'g'ri javob kerak edi.`;
         r.innerHTML = `
           <div class="exam-score-ring">${emoji}</div>
           <div class="exam-result-title" style="color:${passed ? 'var(--accent3)' : 'var(--accent2)'}">${passed ? 'O\'tdingiz!' : 'Muvaffaqiyatsiz'}</div>
           <div class="exam-result-sub">${sub}</div>
           <div class="exam-result-btns">
-            ${!passed ? `<button class="exam-retry-btn" onclick="openExam(${ex.catIdx})">🔄 Qayta urinish</button>` : ''}
+            ${!passed ? `<button class="exam-retry-btn" onclick="openExam(${ex.catIdx},'${ex.mode}')">🔄 Qayta urinish</button>` : ''}
             <button class="exam-close-btn" onclick="closeExamModal()">${passed ? '✓ Davom etish' : 'Yopish'}</button>
           </div>`;
         if (passed) {
-          unlockNextCat(ex.catIdx);
           document.getElementById('examProgFill').style.width = '100%';
-          // Launch spelling challenge after closing exam
-          const passedCatIdx = ex.catIdx;
-          r.querySelector('.exam-close-btn').onclick = function() {
-            closeExamModal();
-            setTimeout(() => startSpellingChallenge(passedCatIdx), 400);
-          };
+          if (isPhrases) {
+            markPhrasesPassed(ex.catIdx);
+          } else {
+            unlockNextCat(ex.catIdx);
+            // Launch spelling challenge after closing exam (words only)
+            const passedCatIdx = ex.catIdx;
+            r.querySelector('.exam-close-btn').onclick = function() {
+              closeExamModal();
+              setTimeout(() => startSpellingChallenge(passedCatIdx), 400);
+            };
+          }
         }
         if (typeof onExamResult === 'function') onExamResult(passed);
       }
@@ -4308,6 +5250,391 @@ brave - jasur - showing courage"></textarea>
         document.getElementById('spellModal').style.display = 'none';
       }
 
+      // ──────────── FINAL (MASTERY) EXAM ────────────────
+      // Tests every word from every category the user has passed, in one
+      // fully-shuffled list (not grouped by topic). For each word, one of 4
+      // question types is picked at random: spelling, multiple-choice
+      // translation, sentence-context, or matching. A word only leaves the
+      // queue once answered correctly; a wrong answer sends it to the back.
+      // Typed spelling gets one forgiving retry for a near-miss (edit
+      // distance 1, e.g. a stray plural "s") before it counts as wrong.
+      // If total wrong answers exceed 4.5% of the word count, the whole
+      // exam restarts from scratch.
+      const fe = {
+        queue: [], curItem: null, curMethod: null,
+        totalWords: 0, masteredSet: null, totalWrongEvents: 0,
+        spellRetrying: false, sentenceLocked: false, choiceLocked: false,
+        matchQWords: [], matchQDefOrder: [], matchQSel: null, matchQMatched: null,
+        stats: { attempts: 0, wrong: 0, weak: new Set() },
+        startedAt: 0
+      };
+
+      function feCatPool(catIdx) {
+        const cat = PRESET_CATEGORIES[catIdx];
+        const pool = [];
+        for (const line of cat.words) {
+          const parts = line.split(' - ');
+          if (parts.length >= 2) pool.push({ word: parts[0].trim(), trans: parts[1].trim(), def: parts.slice(2).join(' - ').trim(), catIdx });
+        }
+        return pool;
+      }
+
+      // Levenshtein edit distance — used to forgive a single-character typo
+      // (e.g. "lips" for "lip") without forgiving a genuinely wrong guess.
+      function levenshtein(a, b) {
+        const m = a.length, n = b.length;
+        if (m === 0) return n;
+        if (n === 0) return m;
+        const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+        for (let i = 0; i <= m; i++) dp[i][0] = i;
+        for (let j = 0; j <= n; j++) dp[0][j] = j;
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+          }
+        }
+        return dp[m][n];
+      }
+
+      // Finds a real example sentence (from PRESET_PHRASES) that uses this
+      // exact word, so the sentence-context question is never invented.
+      function feFindSentenceFor(item) {
+        const cat = PRESET_CATEGORIES[item.catIdx];
+        const phrases = PRESET_PHRASES[cat.name] || [];
+        const re = new RegExp('\\b' + item.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+        for (const line of phrases) {
+          const parts = line.split(' - ');
+          if (parts.length < 2) continue;
+          const eng = parts[0].trim();
+          if (re.test(eng)) {
+            return { sentence: eng.replace(re, '____'), uzbek: parts[1].trim(), answer: item.word, catIdx: item.catIdx };
+          }
+        }
+        return null;
+      }
+
+      function openFinalExam() {
+        const u = getCurUser(); if (!u) return;
+        const lp = getLp(u);
+        const passed = [...(lp.passed || [])].sort((a, b) => a - b);
+        document.getElementById('finalExamModal').style.display = 'flex';
+        ['feSpellSection','feMatchSection','feSentenceSection','feChoiceSection','feResultSection'].forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById('feProgFill').style.width = '0%';
+        document.getElementById('feStageLabel').textContent = '🏆 Yakuniy imtihon';
+        const intro = document.getElementById('feIntroSection');
+        intro.style.display = 'block';
+        const units = lpUnitCounts(u);
+        if (units.done < units.total) {
+          intro.innerHTML = `<div style="text-align:center;padding:20px 0;color:var(--text-muted)">🔒 Yakuniy imtihon hali qulflangan.<br>Barcha turkumlarning <strong>So'z</strong> va <strong>Gap</strong> imtihonlarini topshiring — hozir <strong style="color:var(--accent)">${units.done}/${units.total}</strong>.</div>`;
+          return;
+        }
+        let wordCount = 0;
+        passed.forEach(i => { wordCount += (PRESET_CATEGORIES[i].words || []).length; });
+        intro.innerHTML = `
+          <div style="text-align:center;padding:6px 0 18px">
+            <div style="font-size:2.4rem;margin-bottom:8px">🎓</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:10px">${passed.length} ta turkum · ${wordCount} ta so'z</div>
+            <div style="color:var(--text-muted);font-size:0.85rem;margin-bottom:22px;line-height:1.5">
+              Barcha so'zlar turkumlardan qat'i nazar bir-biriga aralashtiriladi. Har bir so'z tasodifan 4 usuldan biri bilan so'raladi: <strong>yozish</strong>, <strong>tarjimani tanlash</strong>, <strong>gapda toping</strong> yoki <strong>moslashtirish</strong>.<br>
+              Xato javob qaytadan navbatga qo'shiladi — har bir so'zni to'g'ri javoblaguncha davom etasiz.<br>
+              <strong style="color:var(--accent2)">4.5%</strong> dan ortiq xato qilsangiz, imtihon boshidan qaytadan boshlanadi.
+            </div>
+            <button class="lp-start-btn" onclick="startFinalExam()">🚀 Boshlash</button>
+          </div>`;
+      }
+
+      function closeFinalExamModal() {
+        document.getElementById('finalExamModal').style.display = 'none';
+      }
+
+      function startFinalExam() {
+        const u = getCurUser(); if (!u) return;
+        const lp = getLp(u);
+        const cats = [...(lp.passed || [])].sort((a, b) => a - b);
+        let all = [];
+        cats.forEach(catIdx => { all = all.concat(feCatPool(catIdx)); });
+        fe.queue = shuffle(all);
+        fe.totalWords = fe.queue.length;
+        fe.masteredSet = new Set();
+        fe.totalWrongEvents = 0;
+        fe.stats = { attempts: 0, wrong: 0, weak: new Set() };
+        fe.startedAt = Date.now();
+        document.getElementById('feIntroSection').style.display = 'none';
+        document.getElementById('feResultSection').style.display = 'none';
+        feNextItem();
+      }
+
+      function feUpdateProgress() {
+        const pct = fe.totalWords ? Math.round((fe.masteredSet.size / fe.totalWords) * 100) : 0;
+        document.getElementById('feProgFill').style.width = pct + '%';
+        document.getElementById('feStageLabel').textContent = `🏆 Yakuniy imtihon · ${fe.masteredSet.size}/${fe.totalWords}`;
+      }
+
+      // Records one answer. Returns true if the 4.5% error budget was blown
+      // and the exam restarted (callers must stop what they were doing).
+      function feRegisterAttempt(isCorrect, item) {
+        fe.stats.attempts++;
+        if (isCorrect) {
+          fe.masteredSet.add(item.word + '|' + item.catIdx);
+          return false;
+        }
+        fe.stats.wrong++;
+        fe.stats.weak.add(item.word);
+        fe.totalWrongEvents++;
+        if (fe.totalWords > 0 && fe.totalWrongEvents > fe.totalWords * 0.045) {
+          feTriggerRestart();
+          return true;
+        }
+        return false;
+      }
+
+      function feTriggerRestart() {
+        ['feSpellSection','feMatchSection','feSentenceSection','feChoiceSection'].forEach(id => document.getElementById(id).style.display = 'none');
+        const r = document.getElementById('feResultSection');
+        r.style.display = 'block';
+        r.innerHTML = `
+          <div class="exam-score-ring">⚠️</div>
+          <div class="exam-result-title" style="color:var(--accent2)">Xatolar juda ko'p bo'ldi</div>
+          <div class="exam-result-sub">4.5% dan ortiq xato qildingiz — imtihon boshidan qaytadan boshlanadi.<br>Ko'proq diqqat bilan urinib ko'ring!</div>
+          <div class="exam-result-btns">
+            <button class="exam-close-btn" onclick="startFinalExam()">🔄 Qaytadan boshlash</button>
+          </div>`;
+      }
+
+      // Picks the next word and a random question type for it.
+      function feNextItem() {
+        if (fe.queue.length === 0) { showFeResult(); return; }
+        feUpdateProgress();
+        const item = fe.queue[0];
+        fe.curItem = item;
+        fe.spellRetrying = false;
+        const methods = ['spell', 'choice', 'match'];
+        if (feFindSentenceFor(item)) methods.push('sentence');
+        fe.curMethod = methods[Math.floor(Math.random() * methods.length)];
+        ['feSpellSection','feMatchSection','feSentenceSection','feChoiceSection'].forEach(id => document.getElementById(id).style.display = 'none');
+        if (fe.curMethod === 'spell') { document.getElementById('feSpellSection').style.display = 'block'; feRenderSpellQ(); }
+        else if (fe.curMethod === 'choice') { document.getElementById('feChoiceSection').style.display = 'block'; feRenderChoiceQ(); }
+        else if (fe.curMethod === 'sentence') { document.getElementById('feSentenceSection').style.display = 'block'; feRenderSentenceQ(); }
+        else { document.getElementById('feMatchSection').style.display = 'block'; feRenderMatchQ(); }
+      }
+
+      // Shared finish path for the single-shot question types (choice, sentence).
+      function feFinishQuestion(correct) {
+        const item = fe.curItem;
+        if (feRegisterAttempt(correct, item)) return;
+        if (correct) {
+          try { document.getElementById('correctSound').play().catch(() => {}); } catch (e) {}
+          earnPoints(0.5);
+          fe.queue.shift();
+        } else {
+          fe.queue.push(fe.queue.shift());
+        }
+        setTimeout(feNextItem, correct ? 550 : 1100);
+      }
+
+      // ── Method 1: Spelling (type the English word) ──
+      function feRenderSpellQ() {
+        const item = fe.curItem;
+        document.getElementById('feSpellUzbek').textContent = item.trans;
+        document.getElementById('feSpellDef').textContent = item.def || '';
+        const inp = document.getElementById('feSpellInput');
+        inp.value = ''; inp.disabled = false; inp.className = 'spell-input';
+        const fb = document.getElementById('feSpellFeedback');
+        fb.textContent = ''; fb.className = 'spell-feedback';
+        setTimeout(() => inp.focus(), 60);
+      }
+
+      function feCheckSpell() {
+        const inp = document.getElementById('feSpellInput');
+        const val = inp.value.trim().toLowerCase();
+        if (!val) return;
+        const item = fe.curItem;
+        const correctWord = item.word.toLowerCase();
+        const fb = document.getElementById('feSpellFeedback');
+        if (val === correctWord) {
+          inp.disabled = true;
+          inp.classList.add('correct');
+          fb.textContent = '✅ To\'g\'ri!';
+          fb.className = 'spell-feedback ok';
+          try { document.getElementById('correctSound').play().catch(() => {}); } catch (e) {}
+          if (feRegisterAttempt(true, item)) return;
+          earnPoints(0.5);
+          fe.queue.shift();
+          setTimeout(feNextItem, 700);
+          return;
+        }
+        // Near-miss (1-character difference): forgive once, ask to retype.
+        if (!fe.spellRetrying && levenshtein(val, correctWord) <= 1) {
+          fe.spellRetrying = true;
+          inp.value = '';
+          fb.innerHTML = `🤏 Deyarli to'g'ri! To'g'risi: <strong style="color:var(--accent)">${item.word}</strong> — yana bir bor yozib ko'ring`;
+          fb.className = 'spell-feedback fail';
+          playWrongSound();
+          setTimeout(() => inp.focus(), 60);
+          return;
+        }
+        inp.disabled = true;
+        inp.classList.add('wrong-anim');
+        fb.innerHTML = `❌ Noto'g'ri — to'g'risi: <strong style="color:var(--accent)">${item.word}</strong>`;
+        fb.className = 'spell-feedback fail';
+        playWrongSound();
+        if (feRegisterAttempt(false, item)) return;
+        fe.queue.push(fe.queue.shift());
+        setTimeout(feNextItem, 1500);
+      }
+
+      // ── Method 2: Multiple-choice translation ──
+      function feRenderChoiceQ() {
+        const item = fe.curItem;
+        document.getElementById('feChoiceWord').textContent = item.word;
+        document.getElementById('feChoiceDef').textContent = item.def || '';
+        const pool = feCatPool(item.catIdx).filter(p => p.word !== item.word);
+        const wrongs = shuffle(pool).slice(0, 3).map(p => p.trans);
+        while (wrongs.length < 3) wrongs.push('—');
+        const opts = shuffle([item.trans, ...wrongs]);
+        document.getElementById('feChoiceOpts').innerHTML = opts.map(o =>
+          `<button class="exam-opt-btn" onclick="feAnswerChoice('${o.replace(/'/g, "\\'")}')">${o}</button>`
+        ).join('');
+        fe.choiceLocked = false;
+      }
+
+      function feAnswerChoice(chosen) {
+        if (fe.choiceLocked) return;
+        fe.choiceLocked = true;
+        const item = fe.curItem;
+        const btns = document.querySelectorAll('#feChoiceOpts .exam-opt-btn');
+        btns.forEach(b => b.disabled = true);
+        const correct = chosen === item.trans;
+        btns.forEach(b => { if (b.textContent === item.trans) b.classList.add('correct'); });
+        if (!correct) {
+          btns.forEach(b => { if (b.textContent === chosen) b.classList.add('wrong'); });
+          playWrongSound();
+        }
+        feFinishQuestion(correct);
+      }
+
+      // ── Method 3: Sentence-context (fill in the blank) ──
+      function feRenderSentenceQ() {
+        const item = fe.curItem;
+        const q = feFindSentenceFor(item);
+        document.getElementById('feSentUzbek').textContent = q.uzbek;
+        document.getElementById('feSentWord').textContent = q.sentence;
+        const pool = feCatPool(item.catIdx).filter(p => p.word !== item.word);
+        const wrongs = shuffle(pool).slice(0, 3).map(p => p.word);
+        while (wrongs.length < 3) wrongs.push('—');
+        const opts = shuffle([item.word, ...wrongs]);
+        document.getElementById('feSentOpts').innerHTML = opts.map(o =>
+          `<button class="exam-opt-btn" onclick="feAnswerSentenceQ('${o.replace(/'/g, "\\'")}')">${o}</button>`
+        ).join('');
+        fe.sentenceLocked = false;
+      }
+
+      function feAnswerSentenceQ(chosen) {
+        if (fe.sentenceLocked) return;
+        fe.sentenceLocked = true;
+        const item = fe.curItem;
+        const btns = document.querySelectorAll('#feSentOpts .exam-opt-btn');
+        btns.forEach(b => b.disabled = true);
+        const correct = chosen === item.word;
+        btns.forEach(b => { if (b.textContent === item.word) b.classList.add('correct'); });
+        if (!correct) {
+          btns.forEach(b => { if (b.textContent === chosen) b.classList.add('wrong'); });
+          playWrongSound();
+        }
+        feFinishQuestion(correct);
+      }
+
+      // ── Method 4: Matching — 4 REAL untested words pulled straight off the
+      // queue (not decorative decoys). Every pair matched counts as that
+      // word's official test; every wrong pairing is a real wrong attempt
+      // charged to whichever word was selected. ──
+      function feRenderMatchQ() {
+        const n = Math.min(4, fe.queue.length);
+        fe.matchQWords = shuffle(fe.queue.splice(0, n));
+        fe.matchQDefOrder = [...Array(fe.matchQWords.length).keys()].sort((a, b) => fe.matchQWords[a].trans.localeCompare(fe.matchQWords[b].trans));
+        fe.matchQSel = null;
+        fe.matchQMatched = new Set();
+        feRenderMatchQGrid();
+      }
+
+      function feRenderMatchQGrid() {
+        const n = fe.matchQWords.length;
+        let wHtml = '', dHtml = '';
+        for (let i = 0; i < n; i++) {
+          if (fe.matchQMatched.has(i)) continue;
+          const sel = fe.matchQSel === i;
+          wHtml += `<button class="mg-item mg-word${sel ? ' mg-sel' : ''}" id="fqw${i}" onclick="feMatchQWord(${i})">${fe.matchQWords[i].word}</button>`;
+        }
+        for (let d = 0; d < n; d++) {
+          const wi = fe.matchQDefOrder[d];
+          if (fe.matchQMatched.has(wi)) continue;
+          dHtml += `<button class="mg-item mg-def-item" id="fqd${d}" onclick="feMatchQDef(${d})">${fe.matchQWords[wi].trans}</button>`;
+        }
+        document.getElementById('feMatchWords').innerHTML = wHtml;
+        document.getElementById('feMatchDefs').innerHTML = dHtml;
+      }
+
+      function feMatchQWord(i) {
+        if (fe.matchQMatched.has(i)) return;
+        fe.matchQSel = i;
+        feRenderMatchQGrid();
+      }
+
+      function feMatchQDef(d) {
+        if (fe.matchQSel === null) return;
+        const wi = fe.matchQDefOrder[d];
+        const sel = fe.matchQSel;
+        if (wi === sel) {
+          fe.matchQMatched.add(wi);
+          fe.matchQSel = null;
+          try { document.getElementById('correctSound').play().catch(() => {}); } catch (e) {}
+          if (feRegisterAttempt(true, fe.matchQWords[wi])) return;
+          earnPoints(0.5);
+          feUpdateProgress();
+          feRenderMatchQGrid();
+          if (fe.matchQMatched.size === fe.matchQWords.length) setTimeout(feNextItem, 500);
+          return;
+        }
+        playWrongSound();
+        const wb = document.getElementById('fqw' + sel);
+        const db = document.getElementById('fqd' + d);
+        if (wb) { wb.classList.add('mg-wrong'); setTimeout(() => wb.classList.remove('mg-wrong'), 500); }
+        if (db) { db.classList.add('mg-wrong'); setTimeout(() => db.classList.remove('mg-wrong'), 500); }
+        fe.matchQSel = null;
+        // The selected word-card was the one actually under test in this
+        // attempt — charge the wrong answer to it. It stays on the board to
+        // retry (same as before), it just isn't requeued into the master
+        // list since this round won't end until it's matched anyway.
+        if (feRegisterAttempt(false, fe.matchQWords[sel])) return;
+        feRenderMatchQGrid();
+      }
+
+      // ── Final report ──
+      function showFeResult() {
+        ['feSpellSection','feMatchSection','feSentenceSection','feChoiceSection'].forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById('feProgFill').style.width = '100%';
+        document.getElementById('feStageLabel').textContent = '🏆 Yakuniy imtihon';
+        const r = document.getElementById('feResultSection');
+        r.style.display = 'block';
+        const elapsedMin = Math.max(1, Math.round((Date.now() - fe.startedAt) / 60000));
+        const s = fe.stats;
+        const firstTryPct = s.attempts ? Math.round(((s.attempts - s.wrong) / s.attempts) * 100) : 100;
+        const weakList = [...s.weak];
+        r.innerHTML = `
+          <div class="exam-score-ring">🏆</div>
+          <div class="exam-result-title" style="color:var(--accent3)">Barcha so'zlar 100% egallandi!</div>
+          <div class="exam-result-sub">
+            ${fe.totalWords} ta so'z · ${elapsedMin} daqiqa<br>
+            Birinchi urinishda to'g'ri javob: ${firstTryPct}%
+            ${weakList.length ? `<br><br><strong>Yana mashq qilishga arziydi:</strong><br>${weakList.slice(0, 15).join(', ')}${weakList.length > 15 ? '…' : ''}` : ''}
+          </div>
+          <div class="exam-result-btns">
+            <button class="exam-close-btn" onclick="closeFinalExamModal()">✓ Yopish</button>
+          </div>`;
+        grantAchievement('final_exam');
+      }
+
       // ──────────── ACHIEVEMENT HOOKS ────────────────
       function checkAchBatch(u) {
         if (!u) return;
@@ -4356,8 +5683,6 @@ brave - jasur - showing courage"></textarea>
             if (phrases.length >= 3) {
               // Load phrases and start cycle
               presetMode = 'phrases';
-              document.getElementById('modeBtnWords').classList.remove('active-mode');
-              document.getElementById('modeBtnPhrases').classList.add('active-mode');
               if (activePreset !== null) loadPreset(activePreset);
               setTimeout(async () => {
                 await parseWords();
@@ -4368,8 +5693,6 @@ brave - jasur - showing courage"></textarea>
           }
           // phrases done OR no phrases → restart with words
           presetMode = 'words';
-          document.getElementById('modeBtnWords').classList.add('active-mode');
-          document.getElementById('modeBtnPhrases').classList.remove('active-mode');
           if (activePreset !== null) loadPreset(activePreset);
           setTimeout(async () => {
             await parseWords();
@@ -4592,32 +5915,39 @@ brave - jasur - showing courage"></textarea>
         if (!getCurName()) showLoginModal();
         else {
           startStudySession();
+          startAppSession();
           pingLastActive();
           setupFirebasePresence(getCurName());
         }
 
         // 2. Try Firebase in background — don't block the UI
         if (_fbDb) {
-          const timer = setTimeout(() => {}, 0);
           Promise.race([
             _fbDb.ref('users').once('value'),
-            new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
+            new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 3000))
           ]).then(snap => {
             const fbUsers = snap.val() || {};
             if (Object.keys(fbUsers).length > 0) {
-              _usersCache = {};
-              Object.entries(fbUsers).forEach(([k, v]) => { _usersCache[k] = sanitizeUser(v); });
-              localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+              mergeRemoteUsers(fbUsers);
               updateProfileUI();
+              // If this device's copy of the current user is newer than what the
+              // cloud had (e.g. last session's write never finished before close),
+              // push it back up so progress isn't silently lost.
+              const curName = getCurName();
+              if (curName && _usersCache[curName]) {
+                const localTs = _usersCache[curName].updatedAt || 0;
+                const remoteTs = (fbUsers[curName] && fbUsers[curName].updatedAt) || 0;
+                if (localTs > remoteTs) {
+                  _fbDb.ref('users/' + curName).set(_usersCache[curName]).catch(() => {});
+                }
+              }
             } else if (Object.keys(lsUsers).length > 0) {
               _fbDb.ref('users').set(lsUsers).catch(() => {});
             }
             // Realtime listener: updates from other devices/sessions
             _fbDb.ref('users').on('value', snap2 => {
               const d = snap2.val(); if (!d) return;
-              _usersCache = {};
-              Object.entries(d).forEach(([k, v]) => { _usersCache[k] = sanitizeUser(v); });
-              localStorage.setItem('vf_users', JSON.stringify(_usersCache));
+              mergeRemoteUsers(d);
               updateProfileUI();
             });
           }).catch(() => {
@@ -4625,9 +5955,6 @@ brave - jasur - showing courage"></textarea>
           });
         }
       })();
-
-      // ──────────── GLOBAL TIMER TICK ────────────────
-      setInterval(refreshMainTimer, 1000);
 
       // ──────────── FAVICON ────────────────
       (function () {
